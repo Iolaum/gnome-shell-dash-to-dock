@@ -5,7 +5,7 @@
 
 Name:		gnome-shell-extension-dash-to-dock
 Version:	64
-Release:	1%{?dist}
+Release:	2%{?dist}
 Summary:	Dock for the Gnome Shell by micxgx.gmail.com
 
 License:	GPLv2+
@@ -65,6 +65,9 @@ fi
 
 
 %changelog
+* Thu Jan 31 2019 Fedora Release Engineering <releng@fedoraproject.org> - 64-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_30_Mass_Rebuild
+
 * Thu Nov 15 2018 Mike DePaulo <mikedep333@gmail.com> - 64-1
 - Upgrade to 64 for GNOME 3.30 (f29) compatibility as well as formal
   GNOME 3.28 (f28 & EPEL 7.6) compatibility. (resolves #1634447)
