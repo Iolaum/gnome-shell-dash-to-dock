@@ -1,16 +1,32 @@
 %global extdir		%{_datadir}/gnome-shell/extensions/dash-to-dock@micxgx.gmail.com
 %global gschemadir	%{_datadir}/glib-2.0/schemas
 %global giturl		https://github.com/micheleg/dash-to-dock
+%global commit 5658b5c2217ab3b7a036d51b62b357ea99e8fedc
+%global commit_short 5658b5c
+%global commit_date 20200224
 
 
 Name:		gnome-shell-extension-dash-to-dock
 Version:	67
-Release:	2%{?dist}
+Release:	3.%{commit_date}git%{commit_short}%{?dist}
 Summary:	Dock for the Gnome Shell by micxgx.gmail.com
 
 License:	GPLv2+
 URL:		https://micheleg.github.io/dash-to-dock
+%if 0%{?commit:1}
+Source0:	%{giturl}/archive/%{commit}.tar.gz
+%else
 Source0:	%{giturl}/archive/extensions.gnome.org-v%{version}.tar.gz#/%{name}-%{version}.tar.gz
+%endif
+
+# GNOME 3.36 support
+# https://github.com/micheleg/dash-to-dock/pull/1097
+Patch1: 0001-general-Update-to-gnome-shell-3.36-code-with-more-ac.patch
+Patch2: 0002-metadata-Set-extension-compatible-with-shell-3.36-on.patch
+Patch3: 0003-utils-Use-more-ES6-compliant-code-to-override-calls.patch
+Patch4: 0004-windowPreview-Only-hide-the-close-button-if-no-entry.patch
+Patch5: 0005-appIcons-windowPreview-Use-vfunc-instead-of-signals.patch
+
 
 BuildArch:	noarch
 
@@ -27,7 +43,11 @@ to leave the desktop view.
 
 
 %prep
+%if 0%{?commit:1}
+%autosetup -n dash-to-dock-%{commit} -p 1
+%else
 %autosetup -n dash-to-dock-extensions.gnome.org-v%{version} -p 1
+%endif
 
 
 %build
@@ -65,6 +85,10 @@ fi
 
 
 %changelog
+* Tue Feb 25 2020 Mike DePaulo <mikedep333@gmail.com> - 67-3
+- Upgrade to latest master branch
+- Add proposed PR/patches for GNOME 3.36 compatibility
+
 * Tue Jan 28 2020 Fedora Release Engineering <releng@fedoraproject.org> - 67-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_32_Mass_Rebuild
 
