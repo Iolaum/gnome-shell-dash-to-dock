@@ -1,12 +1,14 @@
-From 0859a15ff83ae2a75c9651f85849614396047a88 Mon Sep 17 00:00:00 2001
+From 2c1cec761813cc12abd9e64c0936536e17e45070 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Marco=20Trevisan=20=28Trevi=C3=B1o=29?= <mail@3v1n0.net>
 Date: Mon, 24 Feb 2020 18:10:05 +0100
-Subject: [PATCH 1/5] general: Update to gnome-shell 3.36 code, with more actor
+Subject: [PATCH 1/6] general: Update to gnome-shell 3.36 code, with more actor
  inheritance
 
 As per gnome-shell 3.35 development, more shell widgets are now St.Actors so
 inherit from them and adapt the code not to use the deprecated .actor
 property
+
+Fixes #1097
 ---
  appIconIndicators.js | 20 +++++------
  appIcons.js          | 79 ++++++++++++++++++++++++--------------------

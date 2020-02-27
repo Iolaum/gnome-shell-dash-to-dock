@@ -1,0 +1,91 @@
+From 8bb16f4712ff7dac34b9f5f9be4651f82bc9bfc6 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Marco=20Trevisan=20=28Trevi=C3=B1o=29?= <mail@3v1n0.net>
+Date: Thu, 27 Feb 2020 02:38:32 +0100
+Subject: [PATCH 2/6] general: Use Clutter.ActorAlign to set alignments
+
+St.Align has been deprecated and doesn't actually work in new code
+
+Fixes #1097
+---
+ appIconIndicators.js | 3 ++-
+ appIcons.js          | 3 ++-
+ dash.js              | 4 ++--
+ docking.js           | 4 ++--
+ windowPreview.js     | 3 ++-
+ 5 files changed, 10 insertions(+), 7 deletions(-)
+
+diff --git a/appIconIndicators.js b/appIconIndicators.js
+index 5cedafb..f965829 100644
+--- a/appIconIndicators.js
++++ b/appIconIndicators.js
+@@ -659,7 +659,8 @@ var UnityIndicator = class DashToDock_UnityIndicator extends IndicatorBase {
+         this._notificationBadgeLabel = new St.Label();
+         this._notificationBadgeBin = new St.Bin({
+             child: this._notificationBadgeLabel,
+-            x_align: St.Align.END, y_align: St.Align.START,
++            x_align: Clutter.ActorAlign.END,
++            y_align: Clutter.ActorAlign.START,
+             x_expand: true, y_expand: true
+         });
+         this._notificationBadgeLabel.add_style_class_name('notification-badge');
+diff --git a/appIcons.js b/appIcons.js
+index d3d845b..50eb308 100644
+--- a/appIcons.js
++++ b/appIcons.js
+@@ -614,7 +614,8 @@ class MyAppIcon extends Dash.DashIcon {
+         this._numberOverlayLabel = new St.Label();
+         this._numberOverlayBin = new St.Bin({
+             child: this._numberOverlayLabel,
+-            x_align: St.Align.START, y_align: St.Align.START,
++            x_align: Clutter.ActorAlign.START,
++            y_align: Clutter.ActorAlign.START,
+             x_expand: true, y_expand: true
+         });
+         this._numberOverlayLabel.add_style_class_name('number-overlay');
+diff --git a/dash.js b/dash.js
+index f5459db..82e0a39 100644
+--- a/dash.js
++++ b/dash.js
+@@ -235,8 +235,8 @@ var MyDash = GObject.registerClass({
+         let rtl = Clutter.get_default_text_direction() == Clutter.TextDirection.RTL;
+         super._init({
+             child: this._container,
+-            y_align: St.Align.START,
+-            x_align: rtl ? St.Align.END : St.Align.START
++            y_align: Clutter.ActorAlign.START,
++            x_align: rtl ? Clutter.ActorAlign.END : Clutter.ActorAlign.START,
+         });
+ 
+         if (this._isHorizontal) {
+diff --git a/docking.js b/docking.js
+index 349a245..09ca6ca 100644
+--- a/docking.js
++++ b/docking.js
+@@ -231,8 +231,8 @@ var DockedDash = GObject.registerClass({
+             name: 'dashtodockContainer',
+             reactive: false,
+             style_class: positionStyleClass[this._position],
+-            x_align: this._isHorizontal?St.Align.MIDDLE:St.Align.START,
+-            y_align: this._isHorizontal?St.Align.START:St.Align.MIDDLE
++            x_align: this._isHorizontal ? Clutter.ActorAlign.CENTER : Clutter.ActorAlign.START,
++            y_align: this._isHorizontal ? Clutter.ActorAlign.START : Clutter.ActorAlign.CENTER,
+         });
+         this._delegate = this;
+ 
+diff --git a/windowPreview.js b/windowPreview.js
+index dbf597b..784a8e0 100644
+--- a/windowPreview.js
++++ b/windowPreview.js
+@@ -349,7 +349,8 @@ class DashToDock_WindowPreviewMenuItem extends PopupMenu.PopupBaseMenuItem {
+         let label = new St.Label({ text: window.get_title()});
+         label.set_style('max-width: '+PREVIEW_MAX_WIDTH +'px');
+         let labelBin = new St.Bin({ child: label,
+-                                    x_align: St.Align.MIDDLE});
++            x_align: Clutter.ActorAlign.CENTER,
++        });
+ 
+         this._windowTitleId = this._window.connect('notify::title', () => {
+                                   label.set_text(this._window.get_title());
+-- 
+2.24.1
+

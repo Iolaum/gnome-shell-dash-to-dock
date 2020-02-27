@@ -1,7 +1,7 @@
-From 54a440d2e90fa3399498cf187f559c763b49250f Mon Sep 17 00:00:00 2001
+From 2eab26f675193ed660c4bbe41308a5188d57e69b Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Marco=20Trevisan=20=28Trevi=C3=B1o=29?= <mail@3v1n0.net>
 Date: Mon, 24 Feb 2020 19:01:40 +0100
-Subject: [PATCH 4/5] windowPreview: Only hide the close button if no entry
+Subject: [PATCH 5/6] windowPreview: Only hide the close button if no entry
  child has pointer
 
 ---
@@ -9,10 +9,10 @@ Subject: [PATCH 4/5] windowPreview: Only hide the close button if no entry
  1 file changed, 7 insertions(+), 6 deletions(-)
 
 diff --git a/windowPreview.js b/windowPreview.js
-index dbf597b..3a5cafd 100644
+index 784a8e0..32d0fe6 100644
 --- a/windowPreview.js
 +++ b/windowPreview.js
-@@ -484,9 +484,8 @@ class DashToDock_WindowPreviewMenuItem extends PopupMenu.PopupBaseMenuItem {
+@@ -485,9 +485,8 @@ class DashToDock_WindowPreviewMenuItem extends PopupMenu.PopupBaseMenuItem {
      }
  
      _onLeave() {
@@ -24,7 +24,7 @@ index dbf597b..3a5cafd 100644
  
          return Clutter.EVENT_PROPAGATE;
      }
-@@ -494,9 +493,7 @@ class DashToDock_WindowPreviewMenuItem extends PopupMenu.PopupBaseMenuItem {
+@@ -495,9 +494,7 @@ class DashToDock_WindowPreviewMenuItem extends PopupMenu.PopupBaseMenuItem {
      _idleToggleCloseButton() {
          this._idleToggleCloseId = 0;
  
@@ -35,7 +35,7 @@ index dbf597b..3a5cafd 100644
  
          return GLib.SOURCE_REMOVE;
      }
-@@ -515,6 +512,10 @@ class DashToDock_WindowPreviewMenuItem extends PopupMenu.PopupBaseMenuItem {
+@@ -516,6 +513,10 @@ class DashToDock_WindowPreviewMenuItem extends PopupMenu.PopupBaseMenuItem {
      }
  
      _hideCloseButton() {

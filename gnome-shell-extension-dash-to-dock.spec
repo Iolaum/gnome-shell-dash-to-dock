@@ -8,7 +8,7 @@
 
 Name:		gnome-shell-extension-dash-to-dock
 Version:	67
-Release:	3.%{commit_date}git%{commit_short}%{?dist}
+Release:	4.%{commit_date}git%{commit_short}%{?dist}
 Summary:	Dock for the Gnome Shell by micxgx.gmail.com
 
 License:	GPLv2+
@@ -22,11 +22,11 @@ Source0:	%{giturl}/archive/extensions.gnome.org-v%{version}.tar.gz#/%{name}-%{ve
 # GNOME 3.36 support
 # https://github.com/micheleg/dash-to-dock/pull/1097
 Patch1: 0001-general-Update-to-gnome-shell-3.36-code-with-more-ac.patch
-Patch2: 0002-metadata-Set-extension-compatible-with-shell-3.36-on.patch
-Patch3: 0003-utils-Use-more-ES6-compliant-code-to-override-calls.patch
-Patch4: 0004-windowPreview-Only-hide-the-close-button-if-no-entry.patch
-Patch5: 0005-appIcons-windowPreview-Use-vfunc-instead-of-signals.patch
-
+Patch2: 0002-general-Use-Clutter.ActorAlign-to-set-alignments.patch
+Patch3: 0003-metadata-Set-extension-compatible-with-shell-3.36-on.patch
+Patch4: 0004-utils-Use-more-ES6-compliant-code-to-override-calls.patch
+Patch5: 0005-windowPreview-Only-hide-the-close-button-if-no-entry.patch
+Patch6: 0006-appIcons-windowPreview-Use-vfunc-instead-of-signals.patch
 
 BuildArch:	noarch
 
@@ -85,6 +85,9 @@ fi
 
 
 %changelog
+* Thu Feb 27 2020 Mike DePaulo <mikedep333@gmail.com> - 67-4.20200224git5658b5c
+- Add new addtl proposed patch for GNOME 3.36 compatibility (rhbz: #1794889)
+
 * Tue Feb 25 2020 Mike DePaulo <mikedep333@gmail.com> - 67-3
 - Upgrade to latest master branch
 - Add proposed PR/patches for GNOME 3.36 compatibility

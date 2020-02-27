@@ -1,7 +1,7 @@
-From 1220aaf8c6c55a0e0b9eacd9d579557f874cba37 Mon Sep 17 00:00:00 2001
+From 493f0326cd4b7683438c8967c7deadd73ea7107e Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Marco=20Trevisan=20=28Trevi=C3=B1o=29?= <mail@3v1n0.net>
 Date: Mon, 24 Feb 2020 19:03:01 +0100
-Subject: [PATCH 5/5] appIcons, windowPreview: Use vfunc instead of signals
+Subject: [PATCH 6/6] appIcons, windowPreview: Use vfunc instead of signals
 
 Given that now all the UI classes are actors themselves, it's better to use
 virtual functions to handle to their own signals
@@ -11,7 +11,7 @@ virtual functions to handle to their own signals
  2 files changed, 20 insertions(+), 33 deletions(-)
 
 diff --git a/appIcons.js b/appIcons.js
-index d3d845b..b317267 100644
+index 50eb308..6f958a3 100644
 --- a/appIcons.js
 +++ b/appIcons.js
 @@ -87,7 +87,6 @@ class MyAppIcon extends Dash.DashIcon {
@@ -100,10 +100,10 @@ index d3d845b..b317267 100644
  
      onWindowsChanged() {
 diff --git a/windowPreview.js b/windowPreview.js
-index 3a5cafd..310353a 100644
+index 32d0fe6..f472d11 100644
 --- a/windowPreview.js
 +++ b/windowPreview.js
-@@ -362,11 +362,6 @@ class DashToDock_WindowPreviewMenuItem extends PopupMenu.PopupBaseMenuItem {
+@@ -363,11 +363,6 @@ class DashToDock_WindowPreviewMenuItem extends PopupMenu.PopupBaseMenuItem {
          box.add(labelBin);
          this.add_actor(box);
  
@@ -115,7 +115,7 @@ index 3a5cafd..310353a 100644
          this._cloneTexture(window);
  
          this.connect('destroy', this._onDestroy.bind(this));
-@@ -478,16 +473,24 @@ class DashToDock_WindowPreviewMenuItem extends PopupMenu.PopupBaseMenuItem {
+@@ -479,16 +474,24 @@ class DashToDock_WindowPreviewMenuItem extends PopupMenu.PopupBaseMenuItem {
          return n>0;
      }
  
