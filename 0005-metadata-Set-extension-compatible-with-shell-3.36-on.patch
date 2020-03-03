@@ -1,7 +1,7 @@
-From c2b566411a47706173636ee5a5219adf95870473 Mon Sep 17 00:00:00 2001
+From c32f8245eaff60167c5d688149ad2b85f5e7b735 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Marco=20Trevisan=20=28Trevi=C3=B1o=29?= <mail@3v1n0.net>
 Date: Mon, 24 Feb 2020 18:11:15 +0100
-Subject: [PATCH 3/6] metadata: Set extension compatible with shell 3.36 only
+Subject: [PATCH 05/12] metadata: Set extension compatible with shell 3.36 only
 
 ---
  metadata.json | 2 +-

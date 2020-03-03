@@ -1,7 +1,7 @@
-From 493f0326cd4b7683438c8967c7deadd73ea7107e Mon Sep 17 00:00:00 2001
+From 79577c432c37d7bd44c6ea704725dbc52293e0df Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Marco=20Trevisan=20=28Trevi=C3=B1o=29?= <mail@3v1n0.net>
 Date: Mon, 24 Feb 2020 19:03:01 +0100
-Subject: [PATCH 6/6] appIcons, windowPreview: Use vfunc instead of signals
+Subject: [PATCH 08/12] appIcons, windowPreview: Use vfunc instead of signals
 
 Given that now all the UI classes are actors themselves, it's better to use
 virtual functions to handle to their own signals

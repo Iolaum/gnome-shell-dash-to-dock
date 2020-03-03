@@ -1,7 +1,7 @@
-From 2eab26f675193ed660c4bbe41308a5188d57e69b Mon Sep 17 00:00:00 2001
+From ea91166b950a318354b0530b81547142d3273127 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Marco=20Trevisan=20=28Trevi=C3=B1o=29?= <mail@3v1n0.net>
 Date: Mon, 24 Feb 2020 19:01:40 +0100
-Subject: [PATCH 5/6] windowPreview: Only hide the close button if no entry
+Subject: [PATCH 07/12] windowPreview: Only hide the close button if no entry
  child has pointer
 
 ---

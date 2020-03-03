@@ -1,0 +1,45 @@
+From c0f9f94f3a0a6c0f880cb799f4d1528ae4258cbb Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Marco=20Trevisan=20=28Trevi=C3=B1o=29?= <mail@3v1n0.net>
+Date: Thu, 27 Feb 2020 21:17:36 +0100
+Subject: [PATCH 04/12] dash: Properly respect RTL layout, applying the right
+ box alignment
+
+Icons added to the dash in RTL systems should be right-aligned, so do this
+for all the icons, applying this to the main dash container.
+---
+ dash.js | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/dash.js b/dash.js
+index 4dfe0e8..81c6135 100644
+--- a/dash.js
++++ b/dash.js
+@@ -212,10 +212,11 @@ var MyDash = GObject.registerClass({
+ 
+         this._scrollView.connect('scroll-event', this._onScrollEvent.bind(this));
+ 
++        let rtl = Clutter.get_default_text_direction() == Clutter.TextDirection.RTL;
+         this._box = new St.BoxLayout({
+             vertical: !this._isHorizontal,
+             clip_to_allocation: false,
+-            x_align: Clutter.ActorAlign.START,
++            x_align: rtl ? Clutter.ActorAlign.END : Clutter.ActorAlign.START,
+             y_align: Clutter.ActorAlign.START
+         });
+         this._box._delegate = this;
+@@ -233,11 +234,10 @@ var MyDash = GObject.registerClass({
+ 
+         this._container.add_actor(this._showAppsIcon);
+ 
+-        let rtl = Clutter.get_default_text_direction() == Clutter.TextDirection.RTL;
+         super._init({
+             child: this._container,
++            x_align: Clutter.ActorAlign.START,
+             y_align: Clutter.ActorAlign.START,
+-            x_align: rtl ? Clutter.ActorAlign.END : Clutter.ActorAlign.START,
+         });
+ 
+         if (this._isHorizontal) {
+-- 
+2.24.1
+
