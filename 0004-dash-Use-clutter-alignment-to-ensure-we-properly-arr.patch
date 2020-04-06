@@ -1,0 +1,30 @@
+From 41fc0ce24468f418bfb962f0a48b809d344c66a1 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Marco=20Trevisan=20=28Trevi=C3=B1o=29?= <mail@3v1n0.net>
+Date: Fri, 13 Mar 2020 22:38:43 +0100
+Subject: [PATCH 04/36] dash: Use clutter alignment to ensure we properly
+ arrange the dash
+
+Mimic upstream x/y alignment depending on our vertical disposition
+---
+ dash.js | 5 +++++
+ 1 file changed, 5 insertions(+)
+
+diff --git a/dash.js b/dash.js
+index 4b4e5a1..96ea616 100644
+--- a/dash.js
++++ b/dash.js
+@@ -70,6 +70,11 @@ class DashToDock_MyDashActor extends St.Widget {
+             name: 'dash',
+             layout_manager: layout,
+             clip_to_allocation: true,
++            ...(this._isHorizontal ? {
++                x_align: Clutter.ActorAlign.CENTER,
++            } : {
++                y_align: Clutter.ActorAlign.CENTER,
++            })
+         });
+ 
+         // Since we are usually visible but not usually changing, make sure
+-- 
+2.25.1
+

@@ -1,0 +1,134 @@
+From 800dc0abd65323f158b33a6c883329c036bb7bcb Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Marco=20Trevisan=20=28Trevi=C3=B1o=29?= <mail@3v1n0.net>
+Date: Sat, 14 Mar 2020 03:09:35 +0100
+Subject: [PATCH 28/36] general: Don't use Gtk enum definitions for St widgets
+
+Although they match (by luck), we need to use proper ones
+---
+ appIcons.js      |  1 -
+ dash.js          |  6 ++----
+ docking.js       |  3 +--
+ theming.js       |  1 -
+ windowPreview.js | 16 +++++++++-------
+ 5 files changed, 12 insertions(+), 15 deletions(-)
+
+diff --git a/appIcons.js b/appIcons.js
+index 2fa50c7..3ca3448 100644
+--- a/appIcons.js
++++ b/appIcons.js
+@@ -5,7 +5,6 @@ const GdkPixbuf = imports.gi.GdkPixbuf
+ const Gio = imports.gi.Gio;
+ const GLib = imports.gi.GLib;
+ const GObject = imports.gi.GObject;
+-const Gtk = imports.gi.Gtk;
+ const Signals = imports.signals;
+ const Meta = imports.gi.Meta;
+ const Shell = imports.gi.Shell;
+diff --git a/dash.js b/dash.js
+index 7f8f277..784b91b 100644
+--- a/dash.js
++++ b/dash.js
+@@ -4,8 +4,6 @@ const Clutter = imports.gi.Clutter;
+ const Gio = imports.gi.Gio;
+ const GLib = imports.gi.GLib;
+ const GObject = imports.gi.GObject;
+-const Gtk = imports.gi.Gtk;
+-const Signals = imports.signals;
+ const Meta = imports.gi.Meta;
+ const Shell = imports.gi.Shell;
+ const St = imports.gi.St;
+@@ -200,8 +198,8 @@ var MyDash = GObject.registerClass({
+         this._container = new MyDashActor();
+         this._scrollView = new St.ScrollView({
+             name: 'dashtodockDashScrollview',
+-            hscrollbar_policy: Gtk.PolicyType.NEVER,
+-            vscrollbar_policy: Gtk.PolicyType.NEVER,
++            hscrollbar_policy: St.PolicyType.NEVER,
++            vscrollbar_policy: St.PolicyType.NEVER,
+             enable_mouse_scrolling: false
+         });
+ 
+diff --git a/docking.js b/docking.js
+index 1d249c8..ec4d19c 100644
+--- a/docking.js
++++ b/docking.js
+@@ -3,7 +3,6 @@
+ const Clutter = imports.gi.Clutter;
+ const GLib = imports.gi.GLib;
+ const GObject = imports.gi.GObject;
+-const Gtk = imports.gi.Gtk;
+ const Meta = imports.gi.Meta;
+ const Shell = imports.gi.Shell;
+ const St = imports.gi.St;
+@@ -1142,7 +1141,7 @@ var DockedDash = GObject.registerClass({
+      * Show dock and give key focus to it
+      */
+     _onAccessibilityFocus() {
+-        this._box.navigate_focus(null, Gtk.DirectionType.TAB_FORWARD, false);
++        this._box.navigate_focus(null, St.DirectionType.TAB_FORWARD, false);
+         this._animateIn(DockManager.settings.get_double('animation-time'), 0);
+     }
+ 
+diff --git a/theming.js b/theming.js
+index 19fdf40..efa3139 100644
+--- a/theming.js
++++ b/theming.js
+@@ -3,7 +3,6 @@
+ const Clutter = imports.gi.Clutter;
+ const Gio = imports.gi.Gio;
+ const GLib = imports.gi.GLib;
+-const Gtk = imports.gi.Gtk;
+ const Signals = imports.signals;
+ const Meta = imports.gi.Meta;
+ const Shell = imports.gi.Shell;
+diff --git a/windowPreview.js b/windowPreview.js
+index f472d11..ecce022 100644
+--- a/windowPreview.js
++++ b/windowPreview.js
+@@ -9,7 +9,6 @@ const GLib = imports.gi.GLib;
+ const GObject = imports.gi.GObject;
+ const St = imports.gi.St;
+ const Main = imports.ui.main;
+-const Gtk = imports.gi.Gtk;
+ 
+ const Params = imports.misc.params;
+ const PopupMenu = imports.ui.popupMenu;
+@@ -71,7 +70,7 @@ var WindowPreviewMenu = class DashToDock_WindowPreviewMenu extends PopupMenu.Pop
+         if (windows.length > 0) {
+             this._redisplay();
+             this.open();
+-            this.actor.navigate_focus(null, Gtk.DirectionType.TAB_FORWARD, false);
++            this.actor.navigate_focus(null, St.DirectionType.TAB_FORWARD, false);
+             this._source.emit('sync-tooltip');
+         }
+     }
+@@ -89,10 +88,12 @@ var WindowPreviewList = class DashToDock_WindowPreviewList extends PopupMenu.Pop
+ 
+     constructor(source) {
+         super();
+-        this.actor = new St.ScrollView({ name: 'dashtodockWindowScrollview',
+-                                               hscrollbar_policy: Gtk.PolicyType.NEVER,
+-                                               vscrollbar_policy: Gtk.PolicyType.NEVER,
+-                                               enable_mouse_scrolling: true });
++        this.actor = new St.ScrollView({
++            name: 'dashtodockWindowScrollview',
++            hscrollbar_policy: St.PolicyType.NEVER,
++            vscrollbar_policy: St.PolicyType.NEVER,
++            enable_mouse_scrolling: true
++        });
+ 
+         this.actor.connect('scroll-event', this._onScrollEvent.bind(this));
+ 
+@@ -276,7 +277,8 @@ var WindowPreviewList = class DashToDock_WindowPreviewList extends PopupMenu.Pop
+         // when we *don't* need it, so turn off the scrollbar when that's true.
+         // Dynamic changes in whether we need it aren't handled properly.
+         let needsScrollbar = this._needsScrollbar();
+-        let scrollbar_policy =  needsScrollbar ? Gtk.PolicyType.AUTOMATIC : Gtk.PolicyType.NEVER;
++        let scrollbar_policy = needsScrollbar ?
++            St.PolicyType.AUTOMATIC : St.PolicyType.NEVER;
+         if (this.isHorizontal)
+             this.actor.hscrollbar_policy =  scrollbar_policy;
+         else
+-- 
+2.25.1
+

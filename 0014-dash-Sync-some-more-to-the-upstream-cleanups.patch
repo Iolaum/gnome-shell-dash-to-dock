@@ -1,0 +1,45 @@
+From 3cf8d483ba2847ebf409ce59ec7702e676c5ac29 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Marco=20Trevisan=20=28Trevi=C3=B1o=29?= <mail@3v1n0.net>
+Date: Fri, 13 Mar 2020 13:58:43 +0100
+Subject: [PATCH 14/36] dash: Sync some more to the upstream cleanups
+
+---
+ dash.js | 11 +++--------
+ 1 file changed, 3 insertions(+), 8 deletions(-)
+
+diff --git a/dash.js b/dash.js
+index 0d245a2..4e45f35 100644
+--- a/dash.js
++++ b/dash.js
+@@ -547,17 +547,13 @@ var MyDash = GObject.registerClass({
+         let firstButton = iconChildren[0].child;
+         let firstIcon = firstButton.icon;
+ 
+-        let minHeight, natHeight, minWidth, natWidth;
+-
+         // Enforce the current icon size during the size request
+         firstIcon.setIconSize(this.iconSize);
+-        [minHeight, natHeight] = firstButton.get_preferred_height(-1);
+-        [minWidth, natWidth] = firstButton.get_preferred_width(-1);
++        let [, natHeight] = firstButton.get_preferred_height(-1);
++        let [, natWidth] = firstButton.get_preferred_width(-1);
+ 
+         let scaleFactor = St.ThemeContext.get_for_stage(global.stage).scale_factor;
+-        let iconSizes = this._availableIconSizes.map(function(s) {
+-            return s * scaleFactor;
+-        });
++        let iconSizes = this._availableIconSizes.map(s => s * scaleFactor);
+ 
+         // Subtract icon padding and box spacing from the available height
+         if (this._isHorizontal)
+@@ -605,7 +601,6 @@ var MyDash = GObject.registerClass({
+             icon.icon.set_size(icon.icon.width * scale,
+                                icon.icon.height * scale);
+ 
+-            icon.icon.remove_all_transitions();
+             icon.icon.ease({
+                 width: targetWidth,
+                 height: targetHeight,
+-- 
+2.25.1
+

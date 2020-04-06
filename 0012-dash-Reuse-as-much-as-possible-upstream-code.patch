@@ -1,7 +1,7 @@
-From 15a70c269113ffaa342a6dad6d05cae45fa3c4a3 Mon Sep 17 00:00:00 2001
+From 7c2e2bf87d1eca72a9948bef2255195c03586335 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Marco=20Trevisan=20=28Trevi=C3=B1o=29?= <mail@3v1n0.net>
 Date: Thu, 27 Feb 2020 22:52:41 +0100
-Subject: [PATCH 11/12] dash: Reuse as much as possible upstream code
+Subject: [PATCH 12/36] dash: Reuse as much as possible upstream code
 
 Many functions in dash were just copy-pasted from upstream source, and this
 may lead to living with non-updated code, so instead of this just re-use
@@ -14,10 +14,10 @@ Less code to maintain, yay!
  1 file changed, 54 insertions(+), 298 deletions(-)
 
 diff --git a/dash.js b/dash.js
-index c5c3574..6d135ee 100644
+index 495e1ed..0d245a2 100644
 --- a/dash.js
 +++ b/dash.js
-@@ -305,6 +305,58 @@ var MyDash = GObject.registerClass({
+@@ -309,6 +309,58 @@ var MyDash = GObject.registerClass({
          this._signalsHandler.destroy();
      }
  
@@ -76,7 +76,7 @@ index c5c3574..6d135ee 100644
      _onScrollEvent(actor, event) {
          // If scroll is not used because the icon is resized, let the scroll event propagate.
          if (!Docking.DockManager.settings.get_boolean('icon-size-fixed'))
-@@ -350,88 +402,6 @@ var MyDash = GObject.registerClass({
+@@ -354,88 +406,6 @@ var MyDash = GObject.registerClass({
          return Clutter.EVENT_STOP;
      }
  
@@ -165,7 +165,7 @@ index c5c3574..6d135ee 100644
      _createAppItem(app) {
          let appIcon = new AppIcons.MyAppIcon(this._remoteModel, app,
              this._monitorIndex);
-@@ -524,18 +494,9 @@ var MyDash = GObject.registerClass({
+@@ -528,18 +498,9 @@ var MyDash = GObject.registerClass({
      }
  
      _itemMenuStateChanged(item, opened) {
@@ -186,7 +186,7 @@ index c5c3574..6d135ee 100644
              // I want to listen from outside when a menu is closed. I used to
              // add a custom signal to the appIcon, since gnome 3.8 the signal
              // calling this callback was added upstream.
-@@ -543,49 +504,6 @@ var MyDash = GObject.registerClass({
+@@ -547,49 +508,6 @@ var MyDash = GObject.registerClass({
          }
      }
  
@@ -236,7 +236,7 @@ index c5c3574..6d135ee 100644
      _adjustIconSize() {
          // For the icon size, we only consider children which are "proper"
          // icons (i.e. ignoring drag placeholders) and which are not
-@@ -956,168 +874,6 @@ var MyDash = GObject.registerClass({
+@@ -960,168 +878,6 @@ var MyDash = GObject.registerClass({
  
      }
  
@@ -406,5 +406,5 @@ index c5c3574..6d135ee 100644
          return this._showAppsIcon.toggleButton;
      }
 -- 
-2.24.1
+2.25.1
 

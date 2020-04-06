@@ -1,0 +1,45 @@
+From 18a3cd220a0ec933f298d01bd3b3f0b7b8f7caf5 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Marco=20Trevisan=20=28Trevi=C3=B1o=29?= <mail@3v1n0.net>
+Date: Tue, 17 Mar 2020 23:13:52 +0100
+Subject: [PATCH 33/36] docking: Replace the dashSpacer instance in default
+ controls
+
+---
+ docking.js | 13 +++++++++++--
+ 1 file changed, 11 insertions(+), 2 deletions(-)
+
+diff --git a/docking.js b/docking.js
+index 173c225..da7d7b9 100644
+--- a/docking.js
++++ b/docking.js
+@@ -1804,7 +1804,12 @@ var DockManager = class DashToDock_DockManager {
+ 
+         // Pretend I'm the dash: meant to make appgrid swarm animation come from
+         // the right position of the appShowButton.
+-        Main.overview._overview._controls.dash = this.mainDock.dash;
++        let overviewControls = Main.overview._overview._controls;
++        overviewControls.dash = this.mainDock.dash;
++
++        this._oldDashSpacer = overviewControls._dashSpacer;
++        this._oldDashSpacer.hide();
++        overviewControls._dashSpacer = this.mainDock._dashSpacer;
+     }
+ 
+     _deleteDocks() {
+@@ -1830,8 +1835,12 @@ var DockManager = class DashToDock_DockManager {
+ 
+         this._signalsHandler.removeWithLabel('old-dash-changes');
+ 
+-        Main.overview._overview._controls.dash = this._oldDash;
++        let overviewControls = Main.overview._overview._controls;
++        overviewControls._dashSpacer = this._oldDashSpacer;
++        overviewControls.dash = this._oldDash;
++        this._oldDashSpacer = null;
+ 
++        overviewControls._dashSpacer.show();
+         Main.overview.dash.show();
+         Main.overview.dash.set_width(-1); //reset default dash size
+         // This force the recalculation of the icon size
+-- 
+2.25.1
+

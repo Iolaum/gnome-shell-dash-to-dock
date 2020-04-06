@@ -1,7 +1,7 @@
-From 2c1cec761813cc12abd9e64c0936536e17e45070 Mon Sep 17 00:00:00 2001
+From 226b7ed8a4cef1ab48acb5db89761a40ad863ca8 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Marco=20Trevisan=20=28Trevi=C3=B1o=29?= <mail@3v1n0.net>
 Date: Mon, 24 Feb 2020 18:10:05 +0100
-Subject: [PATCH 01/12] general: Update to gnome-shell 3.36 code, with more
+Subject: [PATCH 01/36] general: Update to gnome-shell 3.36 code, with more
  actor inheritance
 
 As per gnome-shell 3.35 development, more shell widgets are now St.Actors so
@@ -369,7 +369,7 @@ index 07f6c61..f5459db 100644
  
          appIcon.icon.setIconSize(this.iconSize);
 diff --git a/docking.js b/docking.js
-index 2368792..349a245 100644
+index a158caa..7370637 100644
 --- a/docking.js
 +++ b/docking.js
 @@ -276,7 +276,7 @@ var DockedDash = GObject.registerClass({
@@ -414,7 +414,7 @@ index 2368792..349a245 100644
          }
  
          // Add dash container actor and the container to the Chrome.
-@@ -1150,7 +1150,7 @@ var DockedDash = GObject.registerClass({
+@@ -1140,7 +1140,7 @@ var DockedDash = GObject.registerClass({
           * Moreover, hiding the spacer ensure the appGrid allocaton is triggered.
           * This matter as the appview spring animation is triggered by to first reallocaton of the appGrid,
           * (See appDisplay.js, line 202 on GNOME Shell 3.14:
@@ -423,7 +423,7 @@ index 2368792..349a245 100644
           * which in turn seems to be triggered by changes in the other actors in the overview.
           * Normally, as far as I could understand, either the dashSpacer being hidden or the workspacesThumbnails
           * sliding out would trigger the allocation. However, with no stock dash
-@@ -1744,13 +1744,13 @@ var DockManager = class DashToDock_DockManager {
+@@ -1734,13 +1734,13 @@ var DockManager = class DashToDock_DockManager {
          Main.overview._dash = this._allDocks[0].dash;
  
          // set stored icon size  to the new dash
@@ -439,7 +439,7 @@ index 2368792..349a245 100644
  
          // Also set dash width to 1, so it's almost not taken into account by code
          // calculaing the reserved space in the overview. The reason to keep it at 1 is
-@@ -1758,7 +1758,7 @@ var DockManager = class DashToDock_DockManager {
+@@ -1748,7 +1748,7 @@ var DockManager = class DashToDock_DockManager {
          // in turn is triggergin the appsIcon spring animation, required when no other
          // actors has this effect, i.e in horizontal mode and without the workspaceThumnails
          // 1 static workspace only)
@@ -448,7 +448,7 @@ index 2368792..349a245 100644
      }
  
      _deleteDocks() {
-@@ -1778,13 +1778,13 @@ var DockManager = class DashToDock_DockManager {
+@@ -1768,13 +1768,13 @@ var DockManager = class DashToDock_DockManager {
          if (Main.overview.isDummy)
              return;
  
@@ -466,7 +466,7 @@ index 2368792..349a245 100644
  
          Main.overview._dash = this._oldDash;
      }
-@@ -1803,7 +1803,7 @@ var DockManager = class DashToDock_DockManager {
+@@ -1793,7 +1793,7 @@ var DockManager = class DashToDock_DockManager {
              // find visible view
              let visibleView;
              Main.overview.viewSelector.appDisplay._views.every(function(v, index) {
@@ -475,7 +475,7 @@ index 2368792..349a245 100644
                      visibleView = index;
                      return false;
                  }
-@@ -1916,16 +1916,16 @@ var DockManager = class DashToDock_DockManager {
+@@ -1906,16 +1906,16 @@ var DockManager = class DashToDock_DockManager {
                               this._preferredMonitorIndex == Main.layoutManager.primaryIndex;
  
          if (!isHorizontal && dockOnPrimary && extendHeight && fixedIsEnabled) {
@@ -538,5 +538,5 @@ index 4dce1b5..dbf597b 100644
  };
  
 -- 
-2.24.1
+2.25.1
 

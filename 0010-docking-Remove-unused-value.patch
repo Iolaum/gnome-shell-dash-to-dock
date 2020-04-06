@@ -1,17 +1,17 @@
-From 590a4a96f22e145d39983fc8e6d70f5ba9a6fff9 Mon Sep 17 00:00:00 2001
+From a22fbf082ea556680cb850f27aa227613d12e0f7 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Marco=20Trevisan=20=28Trevi=C3=B1o=29?= <mail@3v1n0.net>
 Date: Thu, 27 Feb 2020 17:24:11 +0100
-Subject: [PATCH 09/12] docking: Remove unused value
+Subject: [PATCH 10/36] docking: Remove unused value
 
 ---
  docking.js | 2 --
  1 file changed, 2 deletions(-)
 
 diff --git a/docking.js b/docking.js
-index 3c755e9..7ebc742 100644
+index e0e8c37..d89901a 100644
 --- a/docking.js
 +++ b/docking.js
-@@ -1087,8 +1087,6 @@ var DockedDash = GObject.registerClass({
+@@ -1089,8 +1089,6 @@ var DockedDash = GObject.registerClass({
                  this.remove_style_class_name('extended');
              }
          }
@@ -19,7 +19,7 @@ index 3c755e9..7ebc742 100644
 -        this._y0 = this.y;
      }
  
-     // Set the dash at the correct depth in z
+     _updateStaticBox() {
 -- 
-2.24.1
+2.25.1
 

@@ -1,7 +1,7 @@
-From de2baddaa5d66fb7a5137a03ce6975fa4c0eab19 Mon Sep 17 00:00:00 2001
+From 0ff18f9b998dfd1a2279069d6269da47b9e4ebab Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Marco=20Trevisan=20=28Trevi=C3=B1o=29?= <mail@3v1n0.net>
 Date: Thu, 27 Feb 2020 21:15:28 +0100
-Subject: [PATCH 03/12] docking: Ensure that all the slider children are
+Subject: [PATCH 03/36] docking: Ensure that all the slider children are
  properly centered
 
 Not to make the whole dash container to stick to the topmost/leftmost side,
@@ -12,14 +12,14 @@ This was previously applied to the whole Docked dash, but this was already
 well positioned, while we need to ensure that its content is also properly
 aligned.
 ---
- docking.js | 8 +++++---
- 1 file changed, 5 insertions(+), 3 deletions(-)
+ docking.js | 9 ++++++---
+ 1 file changed, 6 insertions(+), 3 deletions(-)
 
 diff --git a/docking.js b/docking.js
-index 09ca6ca..3c755e9 100644
+index a222ae9..e0e8c37 100644
 --- a/docking.js
 +++ b/docking.js
-@@ -231,15 +231,17 @@ var DockedDash = GObject.registerClass({
+@@ -231,15 +231,18 @@ var DockedDash = GObject.registerClass({
              name: 'dashtodockContainer',
              reactive: false,
              style_class: positionStyleClass[this._position],
@@ -33,13 +33,14 @@ index 09ca6ca..3c755e9 100644
              side: this._position,
 -            slidex: 0
 +            slidex: 0,
-+            x_align: this._isHorizontal ?
-+                Clutter.ActorAlign.CENTER : Clutter.ActorAlign.START,
-+            y_align: this._isHorizontal ?
-+                Clutter.ActorAlign.START : Clutter.ActorAlign.CENTER,
++            ...(this._isHorizontal ? {
++                x_align: Clutter.ActorAlign.CENTER,
++            } : {
++                y_align: Clutter.ActorAlign.CENTER,
++            })
          });
  
          // This is the actor whose hover status us tracked for autohide
 -- 
-2.24.1
+2.25.1
 

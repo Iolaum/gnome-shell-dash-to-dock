@@ -1,7 +1,7 @@
-From 68ea0cfe32d72924b2d756a8835aea9b21391618 Mon Sep 17 00:00:00 2001
+From 88b5bc1bcb0579ae00e8fb8f659eacfbcdfb404b Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Marco=20Trevisan=20=28Trevi=C3=B1o=29?= <mail@3v1n0.net>
 Date: Mon, 24 Feb 2020 18:10:32 +0100
-Subject: [PATCH 06/12] utils: Use more ES6-compliant code to override calls
+Subject: [PATCH 07/36] utils: Use more ES6-compliant code to override calls
 
 ---
  utils.js | 3 +--
@@ -23,5 +23,5 @@ index e028134..a7c657a 100644
  
      destroy() {
 -- 
-2.24.1
+2.25.1
 

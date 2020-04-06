@@ -1,7 +1,7 @@
-From 66a17dc1aca9d606dfab376f5eb7b8d51eb880f9 Mon Sep 17 00:00:00 2001
+From e6bc011cc05bb47d40716fc64a453507d729d3f0 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Marco=20Trevisan=20=28Trevi=C3=B1o=29?= <mail@3v1n0.net>
 Date: Thu, 27 Feb 2020 02:38:32 +0100
-Subject: [PATCH 02/12] general: Use Clutter.ActorAlign to set alignments
+Subject: [PATCH 02/36] general: Use Clutter.ActorAlign to set alignments
 
 St.Align has been deprecated and doesn't actually work in new code
 
@@ -9,10 +9,10 @@ Fixes #1097
 ---
  appIconIndicators.js | 3 ++-
  appIcons.js          | 3 ++-
- dash.js              | 7 ++++---
+ dash.js              | 6 +++---
  docking.js           | 4 ++--
  windowPreview.js     | 3 ++-
- 5 files changed, 12 insertions(+), 8 deletions(-)
+ 5 files changed, 11 insertions(+), 8 deletions(-)
 
 diff --git a/appIconIndicators.js b/appIconIndicators.js
 index 5cedafb..f965829 100644
@@ -43,20 +43,19 @@ index d3d845b..50eb308 100644
          });
          this._numberOverlayLabel.add_style_class_name('number-overlay');
 diff --git a/dash.js b/dash.js
-index f5459db..4dfe0e8 100644
+index f5459db..4b4e5a1 100644
 --- a/dash.js
 +++ b/dash.js
-@@ -69,7 +69,8 @@ class DashToDock_MyDashActor extends St.Widget {
+@@ -69,7 +69,7 @@ class DashToDock_MyDashActor extends St.Widget {
          super._init({
              name: 'dash',
              layout_manager: layout,
 -            clip_to_allocation: true
 +            clip_to_allocation: true,
-+            y_align: Clutter.ActorAlign.CENTER,
          });
  
          // Since we are usually visible but not usually changing, make sure
-@@ -235,8 +236,8 @@ var MyDash = GObject.registerClass({
+@@ -235,8 +235,8 @@ var MyDash = GObject.registerClass({
          let rtl = Clutter.get_default_text_direction() == Clutter.TextDirection.RTL;
          super._init({
              child: this._container,
@@ -68,7 +67,7 @@ index f5459db..4dfe0e8 100644
  
          if (this._isHorizontal) {
 diff --git a/docking.js b/docking.js
-index 349a245..09ca6ca 100644
+index 7370637..a222ae9 100644
 --- a/docking.js
 +++ b/docking.js
 @@ -231,8 +231,8 @@ var DockedDash = GObject.registerClass({
@@ -97,5 +96,5 @@ index dbf597b..784a8e0 100644
          this._windowTitleId = this._window.connect('notify::title', () => {
                                    label.set_text(this._window.get_title());
 -- 
-2.24.1
+2.25.1
 

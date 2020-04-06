@@ -1,0 +1,48 @@
+From 90af49db4f60d45066a350f04f55ed22811c696b Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Marco=20Trevisan=20=28Trevi=C3=B1o=29?= <mail@3v1n0.net>
+Date: Fri, 13 Mar 2020 21:09:00 +0100
+Subject: [PATCH 23/36] fileManager1API: Use a cancellable to stop proxy
+ creation on destruction
+
+---
+ fileManager1API.js | 7 +++++--
+ 1 file changed, 5 insertions(+), 2 deletions(-)
+
+diff --git a/fileManager1API.js b/fileManager1API.js
+index 2b9bbe8..e247296 100644
+--- a/fileManager1API.js
++++ b/fileManager1API.js
+@@ -32,6 +32,7 @@ var FileManager1Client = class DashToDock_FileManager1Client {
+ 
+     constructor() {
+         this._signalsHandler = new Utils.GlobalSignalsHandler();
++        this._cancellable = new Gio.Cancellable();
+ 
+         this._locationMap = new Map();
+         this._proxy = new FileManager1Proxy(Gio.DBus.session,
+@@ -40,11 +41,12 @@ var FileManager1Client = class DashToDock_FileManager1Client {
+                                             (initable, error) => {
+             // Use async construction to avoid blocking on errors.
+             if (error) {
+-                global.log(error);
++                if (!error.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.CANCELLED))
++                    global.log(error);
+             } else {
+                 this._updateLocationMap();
+             }
+-        });
++        }, this._cancellable);
+ 
+         this._signalsHandler.add([
+             this._proxy,
+@@ -68,6 +70,7 @@ var FileManager1Client = class DashToDock_FileManager1Client {
+     }
+ 
+     destroy() {
++        this._cancellable.cancel();
+         this._signalsHandler.destroy();
+         this._proxy.run_dispose();
+     }
+-- 
+2.25.1
+

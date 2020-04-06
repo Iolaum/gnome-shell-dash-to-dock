@@ -1,0 +1,104 @@
+From f6366dd4c263f099e438b25fa640e9362c879022 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Marco=20Trevisan=20=28Trevi=C3=B1o=29?= <mail@3v1n0.net>
+Date: Fri, 13 Mar 2020 20:04:37 +0100
+Subject: [PATCH 21/36] docking: Don't pass allDocks to every child
+
+Just use a static getter from the DockManager
+---
+ docking.js | 29 ++++++++++++++---------------
+ 1 file changed, 14 insertions(+), 15 deletions(-)
+
+diff --git a/docking.js b/docking.js
+index 79f6617..8b338f5 100644
+--- a/docking.js
++++ b/docking.js
+@@ -1303,8 +1303,7 @@ const DashToDock_KeyboardShortcuts_NUM_HOTKEYS = 10;
+ 
+ var KeyboardShortcuts = class DashToDock_KeyboardShortcuts {
+ 
+-    constructor(allDocks){
+-        this._allDocks = allDocks;
++    constructor() {
+         this._signalsHandler = new Utils.GlobalSignalsHandler();
+ 
+         this._hotKeysEnabled = false;
+@@ -1418,8 +1417,7 @@ var KeyboardShortcuts = class DashToDock_KeyboardShortcuts {
+     }
+ 
+     _showOverlay() {
+-        for (let i = 0; i < this._allDocks.length; i++) {
+-            let dock = this._allDocks[i];
++        for (let dock of DockManager.allDocks) {
+             if (DockManager.settings.get_boolean('hotkeys-overlay'))
+                 dock.dash.toggleNumberOverlay(true);
+ 
+@@ -1456,10 +1454,9 @@ var KeyboardShortcuts = class DashToDock_KeyboardShortcuts {
+  */
+ var WorkspaceIsolation = class DashToDock_WorkspaceIsolation {
+ 
+-    constructor(allDocks) {
++    constructor() {
+ 
+         let settings = DockManager.settings;
+-        this._allDocks = allDocks;
+ 
+         this._signalsHandler = new Utils.GlobalSignalsHandler();
+         this._injectionsHandler = new Utils.InjectionsHandler();
+@@ -1468,9 +1465,8 @@ var WorkspaceIsolation = class DashToDock_WorkspaceIsolation {
+             settings,
+             'changed::isolate-workspaces',
+             () => {
+-                    this._allDocks.forEach(function(dock) {
+-                        dock.dash.resetAppIcons();
+-                    });
++                    DockManager.allDocks.forEach((dock) =>
++                        dock.dash.resetAppIcons());
+                     if (settings.get_boolean('isolate-workspaces') ||
+                         settings.get_boolean('isolate-monitors'))
+                         this._enable.bind(this)();
+@@ -1481,9 +1477,8 @@ var WorkspaceIsolation = class DashToDock_WorkspaceIsolation {
+             settings,
+             'changed::isolate-monitors',
+             () => {
+-                    this._allDocks.forEach(function(dock) {
+-                        dock.dash.resetAppIcons();
+-                    });
++                    DockManager.allDocks.forEach((dock) =>
++                        dock.dash.resetAppIcons());
+                     if (settings.get_boolean('isolate-workspaces') ||
+                         settings.get_boolean('isolate-monitors'))
+                         this._enable.bind(this)();
+@@ -1504,7 +1499,7 @@ var WorkspaceIsolation = class DashToDock_WorkspaceIsolation {
+         // although it should never happen
+         this._disable();
+ 
+-        this._allDocks.forEach(function(dock) {
++        DockManager.allDocks.forEach((dock) => {
+             this._signalsHandler.addWithLabel('isolation', [
+                 global.display,
+                 'restacked',
+@@ -1591,6 +1586,10 @@ var DockManager = class DashToDock_DockManager {
+         return Me.imports.extension.dockManager
+     }
+ 
++    static get allDocks() {
++        return DockManager.getDefault()._allDocks;
++    }
++
+     static get settings() {
+         return DockManager.getDefault()._settings;
+     }
+@@ -1719,8 +1718,8 @@ var DockManager = class DashToDock_DockManager {
+ 
+         // Load optional features. We load *after* the docks are created, since
+         // we need to connect the signals to all dock instances.
+-        this._workspaceIsolation = new WorkspaceIsolation(this._allDocks);
+-        this._keyboardShortcuts = new KeyboardShortcuts(this._allDocks);
++        this._workspaceIsolation = new WorkspaceIsolation();
++        this._keyboardShortcuts = new KeyboardShortcuts();
+     }
+ 
+     _prepareMainDash() {
+-- 
+2.25.1
+

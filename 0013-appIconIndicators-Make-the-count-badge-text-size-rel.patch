@@ -1,7 +1,7 @@
-From 44db4e7a86461524986670ec2c83409a27019702 Mon Sep 17 00:00:00 2001
+From 2dc63d309c7dd578ea03f09bd86f57010fccc89b Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Marco=20Trevisan=20=28Trevi=C3=B1o=29?= <mail@3v1n0.net>
 Date: Thu, 27 Feb 2020 23:27:23 +0100
-Subject: [PATCH 12/12] appIconIndicators: Make the count badge text size
+Subject: [PATCH 13/36] appIconIndicators: Make the count badge text size
  relative to icon size
 
 We were using the actual icon container size while we can just use the same
@@ -106,5 +106,5 @@ index f965829..088e024 100644
              this._notificationBadgeBin.hide();
      }
 -- 
-2.24.1
+2.25.1
 

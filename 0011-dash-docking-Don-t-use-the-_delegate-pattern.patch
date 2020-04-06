@@ -1,7 +1,7 @@
-From 27b880d0cf10cfa9cb69167e8d46d395e14d127d Mon Sep 17 00:00:00 2001
+From ef9ab1687eedd40d08b6155555b7eb721f18ced8 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Marco=20Trevisan=20=28Trevi=C3=B1o=29?= <mail@3v1n0.net>
 Date: Thu, 27 Feb 2020 21:53:34 +0100
-Subject: [PATCH 10/12] dash, docking: Don't use the _delegate pattern
+Subject: [PATCH 11/36] dash, docking: Don't use the _delegate pattern
 
 Most of UI classes in upstream gnome-shell are now actors, so don't use the
 delegate pattern anymore for the icons that are now everywhere actors.
@@ -11,10 +11,10 @@ delegate pattern anymore for the icons that are now everywhere actors.
  2 files changed, 12 insertions(+), 18 deletions(-)
 
 diff --git a/dash.js b/dash.js
-index 81c6135..c5c3574 100644
+index 80bfd91..495e1ed 100644
 --- a/dash.js
 +++ b/dash.js
-@@ -505,13 +505,12 @@ var MyDash = GObject.registerClass({
+@@ -509,13 +509,12 @@ var MyDash = GObject.registerClass({
          // the animation)
          let iconChildren = this._box.get_children().filter(function(actor) {
              return actor.child &&
@@ -30,7 +30,7 @@ index 81c6135..c5c3574 100644
          });
  
        return appIcons;
-@@ -594,8 +593,7 @@ var MyDash = GObject.registerClass({
+@@ -598,8 +597,7 @@ var MyDash = GObject.registerClass({
          // the animation)
          let iconChildren = this._box.get_children().filter(function(actor) {
              return actor.child &&
@@ -40,7 +40,7 @@ index 81c6135..c5c3574 100644
                     !actor.animatingOut;
          });
  
-@@ -625,7 +623,7 @@ var MyDash = GObject.registerClass({
+@@ -629,7 +627,7 @@ var MyDash = GObject.registerClass({
          let spacing = themeNode.get_length('spacing');
  
          let firstButton = iconChildren[0].child;
@@ -49,7 +49,7 @@ index 81c6135..c5c3574 100644
  
          let minHeight, natHeight, minWidth, natWidth;
  
-@@ -665,7 +663,7 @@ var MyDash = GObject.registerClass({
+@@ -669,7 +667,7 @@ var MyDash = GObject.registerClass({
  
          let scale = oldIconSize / newIconSize;
          for (let i = 0; i < iconChildren.length; i++) {
@@ -58,7 +58,7 @@ index 81c6135..c5c3574 100644
  
              // Set the new size immediately, to keep the icons' sizes
              // in sync with this.iconSize
-@@ -713,12 +711,11 @@ var MyDash = GObject.registerClass({
+@@ -717,12 +715,11 @@ var MyDash = GObject.registerClass({
  
          let children = this._box.get_children().filter(function(actor) {
              return actor.child &&
@@ -73,7 +73,7 @@ index 81c6135..c5c3574 100644
          });
          // Apps supposed to be in the dash
          let newApps = [];
-@@ -830,7 +827,7 @@ var MyDash = GObject.registerClass({
+@@ -834,7 +831,7 @@ var MyDash = GObject.registerClass({
              // App moved
              let insertHere = newApps[newIndex + 1] && (newApps[newIndex + 1] == oldApps[oldIndex]);
              let alreadyRemoved = removedActors.reduce(function(result, actor) {
@@ -82,7 +82,7 @@ index 81c6135..c5c3574 100644
                  return result || removedApp == newApps[newIndex];
              }, false);
  
-@@ -946,8 +943,7 @@ var MyDash = GObject.registerClass({
+@@ -950,8 +947,7 @@ var MyDash = GObject.registerClass({
      resetAppIcons() {
          let children = this._box.get_children().filter(function(actor) {
              return actor.child &&
@@ -92,7 +92,7 @@ index 81c6135..c5c3574 100644
          });
          for (let i = 0; i < children.length; i++) {
              let item = children[i];
-@@ -1098,7 +1094,7 @@ var MyDash = GObject.registerClass({
+@@ -1102,7 +1098,7 @@ var MyDash = GObject.registerClass({
              if (this._dragPlaceholder && (children[i] == this._dragPlaceholder))
                  continue;
  
@@ -102,7 +102,7 @@ index 81c6135..c5c3574 100644
                  continue;
              if (childId in favorites)
 diff --git a/docking.js b/docking.js
-index 7ebc742..1b448ec 100644
+index d89901a..a40de00 100644
 --- a/docking.js
 +++ b/docking.js
 @@ -232,7 +232,6 @@ var DockedDash = GObject.registerClass({
@@ -113,7 +113,7 @@ index 7ebc742..1b448ec 100644
  
          // This is the sliding actor whose allocation is to be tracked for input regions
          this._slider = new DashSlideContainer({
-@@ -1305,13 +1304,12 @@ var DockedDash = GObject.registerClass({
+@@ -1296,13 +1295,12 @@ var DockedDash = GObject.registerClass({
      _activateApp(appIndex) {
          let children = this.dash._box.get_children().filter(function(actor) {
                  return actor.child &&
@@ -130,5 +130,5 @@ index 7ebc742..1b448ec 100644
  
          // Activate with button = 1, i.e. same as left click
 -- 
-2.24.1
+2.25.1
 

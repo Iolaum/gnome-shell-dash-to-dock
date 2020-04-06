@@ -1,0 +1,53 @@
+From b3cc2b2968a2c107c066c044c282d49ce7cda049 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Marco=20Trevisan=20=28Trevi=C3=B1o=29?= <mail@3v1n0.net>
+Date: Mon, 16 Mar 2020 12:40:00 +0100
+Subject: [PATCH 30/36] docking: Delay toggling to group multiple requests
+
+During startup we may get various 'toggle' requests as per setting changes
+or other signals coming.
+
+So let's just group the requests, waiting to be in idle before actually
+doing something
+---
+ docking.js | 18 ++++++++++++++----
+ 1 file changed, 14 insertions(+), 4 deletions(-)
+
+diff --git a/docking.js b/docking.js
+index 15defd0..da63f6d 100644
+--- a/docking.js
++++ b/docking.js
+@@ -1618,10 +1618,16 @@ var DockManager = class DashToDock_DockManager {
+     }
+ 
+     _toggle() {
+-        this._restoreDash();
+-        this._deleteDocks();
+-        this._createDocks();
+-        this.emit('toggled');
++        if (this._toggleLater)
++            Meta.later_remove(this._toggleLater);
++
++        this._toggleLater = Meta.later_add(Meta.LaterType.BEFORE_REDRAW, () => {
++            delete this._toggleLater;
++            this._restoreDash();
++            this._deleteDocks();
++            this._createDocks();
++            this.emit('toggled');
++        });
+     }
+ 
+     _bindSettingsChanges() {
+@@ -1899,6 +1905,10 @@ var DockManager = class DashToDock_DockManager {
+ 
+     destroy() {
+         this._signalsHandler.destroy();
++        if (this._toggleLater) {
++            Meta.later_remove(this._toggleLater);
++            delete this._toggleLater;
++        }
+         this._restoreDash();
+         this._deleteDocks();
+         this._revertPanelCorners();
+-- 
+2.25.1
+
