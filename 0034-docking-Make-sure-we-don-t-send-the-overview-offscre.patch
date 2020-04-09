@@ -1,4 +1,4 @@
-From bb2ae653315ce5232cf3fe506a01325f6d473338 Mon Sep 17 00:00:00 2001
+From a45637d363d7281f68510bc8122dea9a1042726b Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Marco=20Trevisan=20=28Trevi=C3=B1o=29?= <mail@3v1n0.net>
 Date: Wed, 18 Mar 2020 01:43:02 +0100
 Subject: [PATCH 34/36] docking: Make sure we don't send the overview offscreen
@@ -24,7 +24,7 @@ Fixes LP: #1834967
  1 file changed, 40 insertions(+)
 
 diff --git a/docking.js b/docking.js
-index da7d7b9..1bc4088 100644
+index da7d7b9..30935c0 100644
 --- a/docking.js
 +++ b/docking.js
 @@ -461,6 +461,11 @@ var DockedDash = GObject.registerClass({
@@ -66,7 +66,7 @@ index da7d7b9..1bc4088 100644
 +                            let [, height] = overviewControls.get_transformed_size();
 +                            let monitor = Main.layoutManager.primaryMonitor;
 +                            let contentY2 = monitor.y + y + height;
-+                            let offset = contentY2 - monitor.height;
++                            let offset = Math.max(0, contentY2 - monitor.height);
 +
 +                            if (this._marginLater)
 +                                Meta.later_remove(this._marginLater);

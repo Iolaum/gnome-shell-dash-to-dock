@@ -1,14 +1,14 @@
 %global extdir		%{_datadir}/gnome-shell/extensions/dash-to-dock@micxgx.gmail.com
 %global gschemadir	%{_datadir}/glib-2.0/schemas
 %global giturl		https://github.com/micheleg/dash-to-dock
-%global commit 70f1db83cf6a4e83c26e6ec8b89f9a8477905406
-%global commit_short 70f1db8
-%global commit_date 20200323
+%global commit 77bc70783454f00fefc1e372ca2633ab27efedce
+%global commit_short 77bc707
+%global commit_date 20200408
 
 
 Name:		gnome-shell-extension-dash-to-dock
 Version:	67
-Release:	6.%{commit_date}git%{commit_short}%{?dist}
+Release:	7.%{commit_date}git%{commit_short}%{?dist}
 Summary:	Dock for the Gnome Shell by micxgx.gmail.com
 
 License:	GPLv2+
@@ -20,7 +20,7 @@ Source0:	%{giturl}/archive/extensions.gnome.org-v%{version}.tar.gz#/%{name}-%{ve
 %endif
 
 # GNOME 3.36 support
-# https://github.com/micheleg/dash-to-dock/pull/1097
+# https://github.com/micheleg/dash-to-dock/pull/1097#event-3216150535
 Patch1: 0001-general-Update-to-gnome-shell-3.36-code-with-more-ac.patch
 Patch2: 0002-general-Use-Clutter.ActorAlign-to-set-alignments.patch
 Patch3: 0003-docking-Ensure-that-all-the-slider-children-are-prop.patch
@@ -115,6 +115,12 @@ fi
 
 
 %changelog
+* Thu Apr 09 2020 Mike DePaulo <mikedep333@gmail.com> - 67-7.20200408git77bc707
+- Rebase to master branch as of 2020-04-08
+- Use latest proposed patches (36 total) for GNOME 3.36 compatibility
+  as of 2020-04-08
+  https://github.com/micheleg/dash-to-dock/pull/1097#event-3216150535
+
 * Mon Apr 06 2020 Mike DePaulo <mikedep333@gmail.com> - 67-6.20200323git70f1db8
 - Rebase to master branch as of 2020-03-23
 - Use latest proposed patches (36 total) for GNOME 3.36 compatibility
