@@ -1,8 +1,8 @@
 %global extdir		%{_datadir}/gnome-shell/extensions/dash-to-dock@micxgx.gmail.com
 %global gschemadir	%{_datadir}/glib-2.0/schemas
 %global giturl		https://github.com/micheleg/dash-to-dock
-%global commit 3ca96a251feee9ceb01c6cd7f9d3a1f87207d0c0
-%global commit_short 3ca96a2
+%global commit 9c132034854e382e5fb2ecb72b3feb442975d027
+%global commit_short 9c13203
 %global commit_date 20200415
 
 
