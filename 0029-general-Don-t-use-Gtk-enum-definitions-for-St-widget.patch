@@ -1,7 +1,7 @@
-From 800dc0abd65323f158b33a6c883329c036bb7bcb Mon Sep 17 00:00:00 2001
+From a574fd32f7f0920bca94e6efc2b31ce2ce30fa96 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Marco=20Trevisan=20=28Trevi=C3=B1o=29?= <mail@3v1n0.net>
 Date: Sat, 14 Mar 2020 03:09:35 +0100
-Subject: [PATCH 28/36] general: Don't use Gtk enum definitions for St widgets
+Subject: [PATCH 29/37] general: Don't use Gtk enum definitions for St widgets
 
 Although they match (by luck), we need to use proper ones
 ---
@@ -13,7 +13,7 @@ Although they match (by luck), we need to use proper ones
  5 files changed, 12 insertions(+), 15 deletions(-)
 
 diff --git a/appIcons.js b/appIcons.js
-index 2fa50c7..3ca3448 100644
+index 378559d..cf6e69c 100644
 --- a/appIcons.js
 +++ b/appIcons.js
 @@ -5,7 +5,6 @@ const GdkPixbuf = imports.gi.GdkPixbuf
@@ -25,7 +25,7 @@ index 2fa50c7..3ca3448 100644
  const Meta = imports.gi.Meta;
  const Shell = imports.gi.Shell;
 diff --git a/dash.js b/dash.js
-index 7f8f277..784b91b 100644
+index ab6036c..ea802b3 100644
 --- a/dash.js
 +++ b/dash.js
 @@ -4,8 +4,6 @@ const Clutter = imports.gi.Clutter;
@@ -130,5 +130,5 @@ index f472d11..ecce022 100644
              this.actor.hscrollbar_policy =  scrollbar_policy;
          else
 -- 
-2.25.1
+2.26.0
 

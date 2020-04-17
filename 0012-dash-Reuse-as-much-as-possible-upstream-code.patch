@@ -1,23 +1,31 @@
-From 7c2e2bf87d1eca72a9948bef2255195c03586335 Mon Sep 17 00:00:00 2001
+From b9b0433d1fbe3ada728fdf20cbff8d4b4d0fa215 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Marco=20Trevisan=20=28Trevi=C3=B1o=29?= <mail@3v1n0.net>
 Date: Thu, 27 Feb 2020 22:52:41 +0100
-Subject: [PATCH 12/36] dash: Reuse as much as possible upstream code
+Subject: [PATCH 12/37] dash: Reuse as much as possible upstream code
 
 Many functions in dash were just copy-pasted from upstream source, and this
 may lead to living with non-updated code, so instead of this just re-use
 the default methods, given that JS is nice (or not?) enough to allow to do
 that easily.
 
+The only difference is in handleDragOver where we had to temporarily mock
+some properties in order to adapt the code for the horizontal mode and to
+compute the icons size based on the actual scrollview content, instead of
+the visible box area.
+
 Less code to maintain, yay!
+
+LP: #1867763
+LP: #1867613
 ---
- dash.js | 352 +++++++++-----------------------------------------------
- 1 file changed, 54 insertions(+), 298 deletions(-)
+ dash.js | 417 ++++++++++++++++----------------------------------------
+ 1 file changed, 119 insertions(+), 298 deletions(-)
 
 diff --git a/dash.js b/dash.js
-index 495e1ed..0d245a2 100644
+index 455499a..e86421a 100644
 --- a/dash.js
 +++ b/dash.js
-@@ -309,6 +309,58 @@ var MyDash = GObject.registerClass({
+@@ -309,6 +309,123 @@ var MyDash = GObject.registerClass({
          this._signalsHandler.destroy();
      }
  
@@ -65,8 +73,73 @@ index 495e1ed..0d245a2 100644
 +        return Dash.Dash.prototype._clearEmptyDropTarget.call(this, ...arguments);
 +    }
 +
-+    handleDragOver() {
-+        return Dash.Dash.prototype.handleDragOver.call(this, ...arguments);
++    handleDragOver(source, actor, x, y, time) {
++        let ret;
++        if (!this._isHorizontal) {
++            Object.defineProperty(this._box, 'height', {
++                configurable: true,
++                get: () => this._box.get_children().reduce((a, c) => a + c.height, 0),
++            });
++
++            ret = Dash.Dash.prototype.handleDragOver.call(this, source, actor, x, y, time);
++
++            delete this._box.height;
++
++            if (ret == DND.DragMotionResult.CONTINUE)
++                return ret;
++        } else {
++            Object.defineProperty(this._box, 'height', {
++                configurable: true,
++                get: () => this._box.get_children().reduce((a, c) => a + c.width, 0),
++            });
++
++            let replacedPlaceholderHeight = false;
++            if (this._dragPlaceholder) {
++                replacedPlaceholderHeight = true;
++                Object.defineProperty(this._dragPlaceholder, 'height', {
++                    configurable: true,
++                    get: () => this._dragPlaceholder.width,
++                });
++            }
++
++            ret = Dash.Dash.prototype.handleDragOver.call(this, source, actor, y, x, time);
++
++            delete this._box.height;
++            if (replacedPlaceholderHeight && this._dragPlaceholder)
++                delete this._dragPlaceholder.height;
++
++            if (ret == DND.DragMotionResult.CONTINUE)
++                return ret;
++
++            if (this._dragPlaceholder) {
++                this._dragPlaceholder.child.set_width(this.iconSize / 2);
++                this._dragPlaceholder.child.set_height(this.iconSize);
++
++                let pos = this._dragPlaceholderPos;
++                if (this._isHorizontal && (Clutter.get_default_text_direction() == Clutter.TextDirection.RTL))
++                    pos = this._box.get_children() - 1 - pos;
++
++                if (pos != this._dragPlaceholderPos) {
++                    this._dragPlaceholderPos = pos;
++                    this._box.set_child_at_index(this._dragPlaceholder,
++                        this._dragPlaceholderPos)
++                }
++            }
++        }
++
++        if (this._dragPlaceholder) {
++            // Ensure the next and previous icon are visible when moving the placeholder
++            // (I assume there's room for both of them)
++            if (this._dragPlaceholderPos > 0)
++                ensureActorVisibleInScrollView(this._scrollView,
++                    this._box.get_children()[this._dragPlaceholderPos - 1]);
++
++            if (this._dragPlaceholderPos < this._box.get_children().length - 1)
++                ensureActorVisibleInScrollView(this._scrollView,
++                    this._box.get_children()[this._dragPlaceholderPos + 1]);
++        }
++
++        return ret;
 +    }
 +
 +    acceptDrop() {
@@ -76,7 +149,7 @@ index 495e1ed..0d245a2 100644
      _onScrollEvent(actor, event) {
          // If scroll is not used because the icon is resized, let the scroll event propagate.
          if (!Docking.DockManager.settings.get_boolean('icon-size-fixed'))
-@@ -354,88 +406,6 @@ var MyDash = GObject.registerClass({
+@@ -354,88 +471,6 @@ var MyDash = GObject.registerClass({
          return Clutter.EVENT_STOP;
      }
  
@@ -165,7 +238,7 @@ index 495e1ed..0d245a2 100644
      _createAppItem(app) {
          let appIcon = new AppIcons.MyAppIcon(this._remoteModel, app,
              this._monitorIndex);
-@@ -528,18 +498,9 @@ var MyDash = GObject.registerClass({
+@@ -528,18 +563,9 @@ var MyDash = GObject.registerClass({
      }
  
      _itemMenuStateChanged(item, opened) {
@@ -186,7 +259,7 @@ index 495e1ed..0d245a2 100644
              // I want to listen from outside when a menu is closed. I used to
              // add a custom signal to the appIcon, since gnome 3.8 the signal
              // calling this callback was added upstream.
-@@ -547,49 +508,6 @@ var MyDash = GObject.registerClass({
+@@ -547,49 +573,6 @@ var MyDash = GObject.registerClass({
          }
      }
  
@@ -236,7 +309,7 @@ index 495e1ed..0d245a2 100644
      _adjustIconSize() {
          // For the icon size, we only consider children which are "proper"
          // icons (i.e. ignoring drag placeholders) and which are not
-@@ -960,168 +878,6 @@ var MyDash = GObject.registerClass({
+@@ -960,168 +943,6 @@ var MyDash = GObject.registerClass({
  
      }
  
@@ -406,5 +479,5 @@ index 495e1ed..0d245a2 100644
          return this._showAppsIcon.toggleButton;
      }
 -- 
-2.25.1
+2.26.0
 

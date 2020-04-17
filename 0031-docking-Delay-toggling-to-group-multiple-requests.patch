@@ -1,7 +1,7 @@
-From b3cc2b2968a2c107c066c044c282d49ce7cda049 Mon Sep 17 00:00:00 2001
+From 4110aece1cf5f8f1f53d6f6006a9c88f136a2060 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Marco=20Trevisan=20=28Trevi=C3=B1o=29?= <mail@3v1n0.net>
 Date: Mon, 16 Mar 2020 12:40:00 +0100
-Subject: [PATCH 30/36] docking: Delay toggling to group multiple requests
+Subject: [PATCH 31/37] docking: Delay toggling to group multiple requests
 
 During startup we may get various 'toggle' requests as per setting changes
 or other signals coming.
@@ -49,5 +49,5 @@ index 15defd0..da63f6d 100644
          this._deleteDocks();
          this._revertPanelCorners();
 -- 
-2.25.1
+2.26.0
 

@@ -1,7 +1,7 @@
-From 6a05b92506fd665b038c33e58b2a2378f85ad850 Mon Sep 17 00:00:00 2001
+From 6b243e02a266df3be80f899d182f10d83a4ea577 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Marco=20Trevisan=20=28Trevi=C3=B1o=29?= <mail@3v1n0.net>
 Date: Fri, 13 Mar 2020 19:13:29 +0100
-Subject: [PATCH 16/36] docking: Don't sync overview's iconSize anymore
+Subject: [PATCH 17/37] docking: Don't sync overview's iconSize anymore
 
 Dash icon size is now a read-only property that uses the dash value, so
 there's no need to sync this value, given we would always read the same
@@ -53,5 +53,5 @@ index ab4be65..79b1543 100644
  
      _onShowAppsButtonToggled(button) {
 -- 
-2.25.1
+2.26.0
 

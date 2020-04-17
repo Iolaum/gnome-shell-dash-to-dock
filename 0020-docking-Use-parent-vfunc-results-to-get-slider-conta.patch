@@ -1,7 +1,7 @@
-From b30604e49e31edc4e6a7b99cc3e2140812c7189b Mon Sep 17 00:00:00 2001
+From b171705ddef041d0336128ed88c36aa636ed184e Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Marco=20Trevisan=20=28Trevi=C3=B1o=29?= <mail@3v1n0.net>
 Date: Fri, 13 Mar 2020 19:38:52 +0100
-Subject: [PATCH 19/36] docking: Use parent vfunc results to get slider
+Subject: [PATCH 20/37] docking: Use parent vfunc results to get slider
  container sizes
 
 ---
@@ -31,5 +31,5 @@ index f1a7933..015cbca 100644
              minHeight = (minHeight - this._slideoutSize) * this._slidex + this._slideoutSize;
              natHeight = (natHeight - this._slideoutSize) * this._slidex + this._slideoutSize;
 -- 
-2.25.1
+2.26.0
 

@@ -1,7 +1,7 @@
-From b2cce310318af03151b3c15c5323403b792c7a74 Mon Sep 17 00:00:00 2001
+From 28d84ed4508aeb4c149ed4270414c41de91e7fcb Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Marco=20Trevisan=20=28Trevi=C3=B1o=29?= <mail@3v1n0.net>
 Date: Fri, 13 Mar 2020 19:06:05 +0100
-Subject: [PATCH 15/36] docking: Properly replace default dash in all modes
+Subject: [PATCH 16/37] docking: Properly replace default dash in all modes
 
 As per 3.36, the dash is accessible via Main.overview.dash although this is
 a getter for a property that is set only in case we are not in dummy mode,
@@ -26,10 +26,10 @@ Fixes #1121
  2 files changed, 39 insertions(+), 16 deletions(-)
 
 diff --git a/appIcons.js b/appIcons.js
-index 6f958a3..2ddb245 100644
+index 32a6285..95ff0a5 100644
 --- a/appIcons.js
 +++ b/appIcons.js
-@@ -310,7 +310,7 @@ class MyAppIcon extends Dash.DashIcon {
+@@ -311,7 +311,7 @@ class MyAppIcon extends Dash.DashIcon {
                                             position == St.Side.BOTTOM);
                      // If horizontal also remove the height of the dash
                      let fixedDock = Docking.DockManager.settings.get_boolean('dock-fixed');
@@ -176,5 +176,5 @@ index a40de00..ab4be65 100644
          Me.imports.extension.dockManager = null;
      }
 -- 
-2.25.1
+2.26.0
 

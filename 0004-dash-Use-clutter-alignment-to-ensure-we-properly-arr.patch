@@ -1,7 +1,7 @@
-From 41fc0ce24468f418bfb962f0a48b809d344c66a1 Mon Sep 17 00:00:00 2001
+From f57972eedae0d7f43930928cfbeca3db7c9ff993 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Marco=20Trevisan=20=28Trevi=C3=B1o=29?= <mail@3v1n0.net>
 Date: Fri, 13 Mar 2020 22:38:43 +0100
-Subject: [PATCH 04/36] dash: Use clutter alignment to ensure we properly
+Subject: [PATCH 04/37] dash: Use clutter alignment to ensure we properly
  arrange the dash
 
 Mimic upstream x/y alignment depending on our vertical disposition
@@ -26,5 +26,5 @@ index 4b4e5a1..96ea616 100644
  
          // Since we are usually visible but not usually changing, make sure
 -- 
-2.25.1
+2.26.0
 

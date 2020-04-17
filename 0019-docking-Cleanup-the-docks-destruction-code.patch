@@ -1,7 +1,7 @@
-From 714cc1ad4a241a95abebe342129a14cbfd203f72 Mon Sep 17 00:00:00 2001
+From b21c5b9611f62aa6c2ed996c959407a2297b5d04 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Marco=20Trevisan=20=28Trevi=C3=B1o=29?= <mail@3v1n0.net>
 Date: Fri, 13 Mar 2020 19:37:09 +0100
-Subject: [PATCH 18/36] docking: Cleanup the docks destruction code
+Subject: [PATCH 19/37] docking: Cleanup the docks destruction code
 
 ---
  docking.js | 7 ++-----
@@ -26,5 +26,5 @@ index 5e3c47f..f1a7933 100644
  
      _restoreDash() {
 -- 
-2.25.1
+2.26.0
 

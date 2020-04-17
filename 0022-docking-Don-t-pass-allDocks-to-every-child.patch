@@ -1,7 +1,7 @@
-From f6366dd4c263f099e438b25fa640e9362c879022 Mon Sep 17 00:00:00 2001
+From 9a4f5fb54aba8499f6f71099db5239ea2e55403b Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Marco=20Trevisan=20=28Trevi=C3=B1o=29?= <mail@3v1n0.net>
 Date: Fri, 13 Mar 2020 20:04:37 +0100
-Subject: [PATCH 21/36] docking: Don't pass allDocks to every child
+Subject: [PATCH 22/37] docking: Don't pass allDocks to every child
 
 Just use a static getter from the DockManager
 ---
@@ -100,5 +100,5 @@ index 79f6617..8b338f5 100644
  
      _prepareMainDash() {
 -- 
-2.25.1
+2.26.0
 

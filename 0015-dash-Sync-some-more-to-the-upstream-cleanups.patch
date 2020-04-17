@@ -1,17 +1,17 @@
-From 3cf8d483ba2847ebf409ce59ec7702e676c5ac29 Mon Sep 17 00:00:00 2001
+From 5bce48efd359f9798039328b656ea582f57f5371 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Marco=20Trevisan=20=28Trevi=C3=B1o=29?= <mail@3v1n0.net>
 Date: Fri, 13 Mar 2020 13:58:43 +0100
-Subject: [PATCH 14/36] dash: Sync some more to the upstream cleanups
+Subject: [PATCH 15/37] dash: Sync some more to the upstream cleanups
 
 ---
  dash.js | 11 +++--------
  1 file changed, 3 insertions(+), 8 deletions(-)
 
 diff --git a/dash.js b/dash.js
-index 0d245a2..4e45f35 100644
+index e86421a..a24cae5 100644
 --- a/dash.js
 +++ b/dash.js
-@@ -547,17 +547,13 @@ var MyDash = GObject.registerClass({
+@@ -612,17 +612,13 @@ var MyDash = GObject.registerClass({
          let firstButton = iconChildren[0].child;
          let firstIcon = firstButton.icon;
  
@@ -32,7 +32,7 @@ index 0d245a2..4e45f35 100644
  
          // Subtract icon padding and box spacing from the available height
          if (this._isHorizontal)
-@@ -605,7 +601,6 @@ var MyDash = GObject.registerClass({
+@@ -670,7 +666,6 @@ var MyDash = GObject.registerClass({
              icon.icon.set_size(icon.icon.width * scale,
                                 icon.icon.height * scale);
  
@@ -41,5 +41,5 @@ index 0d245a2..4e45f35 100644
                  width: targetWidth,
                  height: targetHeight,
 -- 
-2.25.1
+2.26.0
 
