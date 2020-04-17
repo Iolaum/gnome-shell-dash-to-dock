@@ -1,7 +1,7 @@
-From e6bc011cc05bb47d40716fc64a453507d729d3f0 Mon Sep 17 00:00:00 2001
+From ccfef45fb256aba71e0ae895d43afe2430a86dc0 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Marco=20Trevisan=20=28Trevi=C3=B1o=29?= <mail@3v1n0.net>
 Date: Thu, 27 Feb 2020 02:38:32 +0100
-Subject: [PATCH 02/36] general: Use Clutter.ActorAlign to set alignments
+Subject: [PATCH 02/37] general: Use Clutter.ActorAlign to set alignments
 
 St.Align has been deprecated and doesn't actually work in new code
 
@@ -29,10 +29,10 @@ index 5cedafb..f965829 100644
          });
          this._notificationBadgeLabel.add_style_class_name('notification-badge');
 diff --git a/appIcons.js b/appIcons.js
-index d3d845b..50eb308 100644
+index 8dd751c..3962b10 100644
 --- a/appIcons.js
 +++ b/appIcons.js
-@@ -614,7 +614,8 @@ class MyAppIcon extends Dash.DashIcon {
+@@ -615,7 +615,8 @@ class MyAppIcon extends Dash.DashIcon {
          this._numberOverlayLabel = new St.Label();
          this._numberOverlayBin = new St.Bin({
              child: this._numberOverlayLabel,
@@ -96,5 +96,5 @@ index dbf597b..784a8e0 100644
          this._windowTitleId = this._window.connect('notify::title', () => {
                                    label.set_text(this._window.get_title());
 -- 
-2.25.1
+2.26.0
 

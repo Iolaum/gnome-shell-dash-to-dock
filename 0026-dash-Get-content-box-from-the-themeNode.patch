@@ -1,7 +1,7 @@
-From 03390b56eff5b4cc15d135de8a34311c26db259f Mon Sep 17 00:00:00 2001
+From 1bdfa71ae8635ebd4766b011fef1979f57265013 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Marco=20Trevisan=20=28Trevi=C3=B1o=29?= <mail@3v1n0.net>
 Date: Fri, 13 Mar 2020 22:05:38 +0100
-Subject: [PATCH 25/36] dash: Get content box from the themeNode
+Subject: [PATCH 26/37] dash: Get content box from the themeNode
 
 Not doing this may lead to using a wrong box area to allocate our children
 
@@ -11,7 +11,7 @@ Fixes #1113
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/dash.js b/dash.js
-index 989d66d..d2a1f90 100644
+index 0e78a73..8024825 100644
 --- a/dash.js
 +++ b/dash.js
 @@ -85,7 +85,7 @@ class DashToDock_MyDashActor extends St.Widget {
@@ -24,5 +24,5 @@ index 989d66d..d2a1f90 100644
          let availHeight = contentBox.y2 - contentBox.y1;
  
 -- 
-2.25.1
+2.26.0
 

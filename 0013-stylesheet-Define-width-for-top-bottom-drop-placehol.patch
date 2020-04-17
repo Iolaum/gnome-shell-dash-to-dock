@@ -1,0 +1,31 @@
+From 826aae85f06d7aefcec042ebcacabe3647c3b658 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Marco=20Trevisan=20=28Trevi=C3=B1o=29?= <mail@3v1n0.net>
+Date: Thu, 16 Apr 2020 07:26:39 +0200
+Subject: [PATCH 13/37] stylesheet: Define width for top/bottom drop
+ placeholder
+
+This is defined upstream only for the left/rigth case
+---
+ stylesheet.css | 6 ++++++
+ 1 file changed, 6 insertions(+)
+
+diff --git a/stylesheet.css b/stylesheet.css
+index 4d4c2dc..c6034f0 100644
+--- a/stylesheet.css
++++ b/stylesheet.css
+@@ -116,6 +116,12 @@ position. In the other cases the border are taken dynamically from the theme */
+     */
+ }
+ 
++#dashtodockContainer.top #dash .placeholder,
++#dashtodockContainer.bottom #dash .placeholder {
++    width: 32px;
++    height: 1px;
++}
++
+ /*
+  * This is applied to a dummy actor. Only the alpha value for the background and border color
+  * and the transition-duration are used
+-- 
+2.26.0
+

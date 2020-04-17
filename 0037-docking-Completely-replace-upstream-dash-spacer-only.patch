@@ -1,7 +1,7 @@
-From 8c94a8d6db47ebc1273e690f4e0ba5e592f7f268 Mon Sep 17 00:00:00 2001
+From 84e9b251f139c2afaeb88de45b2dc86dd73430c7 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Marco=20Trevisan=20=28Trevi=C3=B1o=29?= <mail@3v1n0.net>
 Date: Thu, 19 Mar 2020 00:59:05 +0100
-Subject: [PATCH 36/36] docking: Completely replace upstream dash spacer only
+Subject: [PATCH 37/37] docking: Completely replace upstream dash spacer only
  in vertical mode
 
 When we're in vertical mode we can relay on upstream behavior for the dash
@@ -14,7 +14,7 @@ visible.
  1 file changed, 14 insertions(+), 32 deletions(-)
 
 diff --git a/docking.js b/docking.js
-index 30935c0..47c7e54 100644
+index 24d094f..a63fea8 100644
 --- a/docking.js
 +++ b/docking.js
 @@ -333,10 +333,6 @@ var DockedDash = GObject.registerClass({
@@ -73,9 +73,9 @@ index 30935c0..47c7e54 100644
 -        this._oldDashSpacer = overviewControls._dashSpacer;
 -        this._oldDashSpacer.hide();
 -        overviewControls._dashSpacer = this.mainDock._dashSpacer;
-+        if (!this.mainDock.dash._isHorizontal) {
++        if (!this.mainDock.dash._isHorizontal && !this._oldDashSpacer) {
 +            this._oldDashSpacer = overviewControls._dashSpacer;
-+            overviewControls.remove_child(this._oldDashSpacer);
++            overviewControls._group.remove_child(this._oldDashSpacer);
 +            overviewControls._dashSpacer = this.mainDock._dashSpacer;
 +        }
      }
@@ -90,7 +90,7 @@ index 30935c0..47c7e54 100644
 -        this._oldDashSpacer = null;
 +        if (!!this._oldDashSpacer) {
 +            overviewControls._dashSpacer = this._oldDashSpacer;
-+            overviewControls.insert_child_at_index(this._oldDashSpacer, 0);
++            overviewControls._group.insert_child_at_index(this._oldDashSpacer, 0);
 +            this._oldDashSpacer = null;
 +        }
  
@@ -100,5 +100,5 @@ index 30935c0..47c7e54 100644
          Main.overview.dash.set_width(-1); //reset default dash size
          // This force the recalculation of the icon size
 -- 
-2.25.1
+2.26.0
 

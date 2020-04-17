@@ -1,7 +1,7 @@
-From fae388592c5c527d4a6fff8f24f2d2c3bdc93f7e Mon Sep 17 00:00:00 2001
+From b477bdb432f1f9bb15d1b0a31c47a245857a4b8e Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Marco=20Trevisan=20=28Trevi=C3=B1o=29?= <mail@3v1n0.net>
 Date: Mon, 24 Feb 2020 19:03:01 +0100
-Subject: [PATCH 09/36] appIcons, windowPreview: Use vfunc instead of signals
+Subject: [PATCH 09/37] appIcons, windowPreview: Use vfunc instead of signals
 
 Given that now all the UI classes are actors themselves, it's better to use
 virtual functions to handle to their own signals
@@ -11,10 +11,10 @@ virtual functions to handle to their own signals
  2 files changed, 20 insertions(+), 33 deletions(-)
 
 diff --git a/appIcons.js b/appIcons.js
-index 50eb308..6f958a3 100644
+index 3962b10..32a6285 100644
 --- a/appIcons.js
 +++ b/appIcons.js
-@@ -87,7 +87,6 @@ class MyAppIcon extends Dash.DashIcon {
+@@ -88,7 +88,6 @@ class MyAppIcon extends Dash.DashIcon {
          this._location = appInfo ? appInfo.get_string('XdtdUri') : null;
  
          this._updateIndicatorStyle();
@@ -22,7 +22,7 @@ index 50eb308..6f958a3 100644
  
          // Monitor windows-changes instead of app state.
          // Keep using the same Id and function callback (that is extended)
-@@ -139,12 +138,6 @@ class MyAppIcon extends Dash.DashIcon {
+@@ -140,12 +139,6 @@ class MyAppIcon extends Dash.DashIcon {
              ]);
          }
  
@@ -35,7 +35,7 @@ index 50eb308..6f958a3 100644
          this._numberOverlay();
  
          this._previewMenuManager = null;
-@@ -191,20 +184,11 @@ class MyAppIcon extends Dash.DashIcon {
+@@ -192,20 +185,11 @@ class MyAppIcon extends Dash.DashIcon {
              this.onWindowsChanged();
      }
  
@@ -59,7 +59,7 @@ index 50eb308..6f958a3 100644
  
          // We only activate windows of running applications, i.e. we never open new windows
          // We check if the app is running, and that the # of windows is > 0 in
-@@ -213,10 +197,10 @@ class MyAppIcon extends Dash.DashIcon {
+@@ -214,10 +198,10 @@ class MyAppIcon extends Dash.DashIcon {
              && this.getInterestingWindows().length > 0;
  
          if (!appIsRunning)
@@ -72,7 +72,7 @@ index 50eb308..6f958a3 100644
          else
              this._optionalScrollCycleWindowsDeadTimeId = GLib.timeout_add(
                  GLib.PRIORITY_DEFAULT, 250, () => {
-@@ -225,7 +209,7 @@ class MyAppIcon extends Dash.DashIcon {
+@@ -226,7 +210,7 @@ class MyAppIcon extends Dash.DashIcon {
  
          let direction = null;
  
@@ -81,7 +81,7 @@ index 50eb308..6f958a3 100644
          case Clutter.ScrollDirection.UP:
              direction = Meta.MotionDirection.UP;
              break;
-@@ -233,7 +217,7 @@ class MyAppIcon extends Dash.DashIcon {
+@@ -234,7 +218,7 @@ class MyAppIcon extends Dash.DashIcon {
              direction = Meta.MotionDirection.DOWN;
              break;
          case Clutter.ScrollDirection.SMOOTH:
@@ -90,7 +90,7 @@ index 50eb308..6f958a3 100644
              if (dy < 0)
                  direction = Meta.MotionDirection.UP;
              else if (dy > 0)
-@@ -257,7 +241,7 @@ class MyAppIcon extends Dash.DashIcon {
+@@ -258,7 +242,7 @@ class MyAppIcon extends Dash.DashIcon {
          }
          else
              this.app.activate();
@@ -145,5 +145,5 @@ index 32d0fe6..f472d11 100644
  
      _idleToggleCloseButton() {
 -- 
-2.25.1
+2.26.0
 

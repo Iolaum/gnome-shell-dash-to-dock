@@ -1,7 +1,7 @@
-From f43f517bee1dafc07d95ff541457be5e2f26343b Mon Sep 17 00:00:00 2001
+From 2882d6bb7d4d31fe28006a6456f1d3e61ab8f617 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Marco=20Trevisan=20=28Trevi=C3=B1o=29?= <mail@3v1n0.net>
 Date: Tue, 17 Mar 2020 14:13:13 +0100
-Subject: [PATCH 32/36] docking: Reimplement Clutter.BindConstraint to bind to
+Subject: [PATCH 33/37] docking: Reimplement Clutter.BindConstraint to bind to
  Maximum size only
 
 With mutter commit 4f8e518d4 BindConstraint is applied in a way that the
@@ -19,7 +19,7 @@ See more at:
  1 file changed, 34 insertions(+), 1 deletion(-)
 
 diff --git a/docking.js b/docking.js
-index 2712037..173c225 100644
+index 2712037..9c79dfb 100644
 --- a/docking.js
 +++ b/docking.js
 @@ -160,6 +160,39 @@ var DashSlideContainer = GObject.registerClass({
@@ -27,7 +27,7 @@ index 2712037..173c225 100644
  });
  
 +let DockBindConstraint = Clutter.BindConstraint;
-+if (imports.system.version > 16501) {
++if (imports.system.version >= 16401) {
 +    DockBindConstraint = GObject.registerClass(
 +    class DockBindConstraint extends Clutter.BindConstraint {
 +
@@ -72,5 +72,5 @@ index 2712037..173c225 100644
              coordinate: this._isHorizontal ?
                  Clutter.BindCoordinate.WIDTH : Clutter.BindCoordinate.HEIGHT
 -- 
-2.25.1
+2.26.0
 

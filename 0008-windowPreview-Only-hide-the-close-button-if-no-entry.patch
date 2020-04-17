@@ -1,7 +1,7 @@
-From 89d3ed7d6cd59dc3f0581d698f8470a10de71de4 Mon Sep 17 00:00:00 2001
+From 68860d56254f0c5e1255edd000ae864b642e7d24 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Marco=20Trevisan=20=28Trevi=C3=B1o=29?= <mail@3v1n0.net>
 Date: Mon, 24 Feb 2020 19:01:40 +0100
-Subject: [PATCH 08/36] windowPreview: Only hide the close button if no entry
+Subject: [PATCH 08/37] windowPreview: Only hide the close button if no entry
  child has pointer
 
 ---
@@ -47,5 +47,5 @@ index 784a8e0..32d0fe6 100644
          this.closeButton.ease({
              opacity: 0,
 -- 
-2.25.1
+2.26.0
 

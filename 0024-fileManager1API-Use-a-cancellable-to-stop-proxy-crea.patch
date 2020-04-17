@@ -1,7 +1,7 @@
-From 90af49db4f60d45066a350f04f55ed22811c696b Mon Sep 17 00:00:00 2001
+From 4cc3028f9bcf84ebf0ef74ea11ebeb2e080015bf Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Marco=20Trevisan=20=28Trevi=C3=B1o=29?= <mail@3v1n0.net>
 Date: Fri, 13 Mar 2020 21:09:00 +0100
-Subject: [PATCH 23/36] fileManager1API: Use a cancellable to stop proxy
+Subject: [PATCH 24/37] fileManager1API: Use a cancellable to stop proxy
  creation on destruction
 
 ---
@@ -44,5 +44,5 @@ index 2b9bbe8..e247296 100644
          this._proxy.run_dispose();
      }
 -- 
-2.25.1
+2.26.0
 

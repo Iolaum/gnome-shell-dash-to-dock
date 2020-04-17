@@ -1,7 +1,7 @@
-From 0ff18f9b998dfd1a2279069d6269da47b9e4ebab Mon Sep 17 00:00:00 2001
+From 0903f8c1052039fc4dffeb813678ec1a8cb72682 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Marco=20Trevisan=20=28Trevi=C3=B1o=29?= <mail@3v1n0.net>
 Date: Thu, 27 Feb 2020 21:15:28 +0100
-Subject: [PATCH 03/36] docking: Ensure that all the slider children are
+Subject: [PATCH 03/37] docking: Ensure that all the slider children are
  properly centered
 
 Not to make the whole dash container to stick to the topmost/leftmost side,
@@ -42,5 +42,5 @@ index a222ae9..e0e8c37 100644
  
          // This is the actor whose hover status us tracked for autohide
 -- 
-2.25.1
+2.26.0
 

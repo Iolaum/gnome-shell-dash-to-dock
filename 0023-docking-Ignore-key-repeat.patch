@@ -1,7 +1,7 @@
-From c63652f6ab25b6bbd69000b0612db7be2b1a7690 Mon Sep 17 00:00:00 2001
+From 01b539a182e2731353b27cb579bf236917ce6d78 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Marco=20Trevisan=20=28Trevi=C3=B1o=29?= <mail@3v1n0.net>
 Date: Fri, 13 Mar 2020 20:39:10 +0100
-Subject: [PATCH 22/36] docking: Ignore key-repeat
+Subject: [PATCH 23/37] docking: Ignore key-repeat
 
 Use same keybinding flags as upstream to avoid an icon keybinding to be
 triggered multiple times.
@@ -32,5 +32,5 @@ index 8b338f5..1d249c8 100644
                                    this._showOverlay.bind(this));
              this._shortcutIsSet = true;
 -- 
-2.25.1
+2.26.0
 

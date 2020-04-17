@@ -1,7 +1,7 @@
-From a45637d363d7281f68510bc8122dea9a1042726b Mon Sep 17 00:00:00 2001
+From 4a40b1de64ba83656f0df40cc8c91eb34cd4d302 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Marco=20Trevisan=20=28Trevi=C3=B1o=29?= <mail@3v1n0.net>
 Date: Wed, 18 Mar 2020 01:43:02 +0100
-Subject: [PATCH 34/36] docking: Make sure we don't send the overview offscreen
+Subject: [PATCH 35/37] docking: Make sure we don't send the overview offscreen
  in extended mode
 
 When we vertically extend the dash, due to the fact that the dash is part of
@@ -24,7 +24,7 @@ Fixes LP: #1834967
  1 file changed, 40 insertions(+)
 
 diff --git a/docking.js b/docking.js
-index da7d7b9..30935c0 100644
+index 022954c..24d094f 100644
 --- a/docking.js
 +++ b/docking.js
 @@ -461,6 +461,11 @@ var DockedDash = GObject.registerClass({
@@ -90,5 +90,5 @@ index da7d7b9..30935c0 100644
              this._fm1Client.destroy();
              this._fm1Client = null;
 -- 
-2.25.1
+2.26.0
 

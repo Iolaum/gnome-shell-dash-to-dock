@@ -1,7 +1,7 @@
-From 8db315fbe55d5dd5c68cc7114933a28800f7e51f Mon Sep 17 00:00:00 2001
+From d361dd128d345476af5e9c3c2b32bcb845949fe9 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Marco=20Trevisan=20=28Trevi=C3=B1o=29?= <mail@3v1n0.net>
 Date: Thu, 27 Feb 2020 21:17:36 +0100
-Subject: [PATCH 05/36] dash: Properly respect RTL layout, applying the right
+Subject: [PATCH 05/37] dash: Properly respect RTL layout, applying the right
  box alignment
 
 Icons added to the dash in RTL systems should be right-aligned, so do this
@@ -41,5 +41,5 @@ index 96ea616..80bfd91 100644
  
          if (this._isHorizontal) {
 -- 
-2.25.1
+2.26.0
 

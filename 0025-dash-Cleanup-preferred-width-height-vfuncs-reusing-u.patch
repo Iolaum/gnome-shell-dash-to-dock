@@ -1,7 +1,7 @@
-From f7249204c57e3344d0f007ed28c228302aa9f9cd Mon Sep 17 00:00:00 2001
+From 0d4cd492824ffec58f1826ab6de0ad977685376e Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Marco=20Trevisan=20=28Trevi=C3=B1o=29?= <mail@3v1n0.net>
 Date: Fri, 13 Mar 2020 21:47:09 +0100
-Subject: [PATCH 24/36] dash: Cleanup preferred width/height vfuncs reusing
+Subject: [PATCH 25/37] dash: Cleanup preferred width/height vfuncs reusing
  upstream code
 
 Try to reuse as much as possible upstream code
@@ -10,7 +10,7 @@ Try to reuse as much as possible upstream code
  1 file changed, 8 insertions(+), 18 deletions(-)
 
 diff --git a/dash.js b/dash.js
-index 4e45f35..989d66d 100644
+index a24cae5..0e78a73 100644
 --- a/dash.js
 +++ b/dash.js
 @@ -112,8 +112,7 @@ class DashToDock_MyDashActor extends St.Widget {
@@ -65,5 +65,5 @@ index 4e45f35..989d66d 100644
  });
  
 -- 
-2.25.1
+2.26.0
 

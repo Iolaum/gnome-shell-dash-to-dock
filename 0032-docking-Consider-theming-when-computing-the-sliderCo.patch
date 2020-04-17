@@ -1,7 +1,7 @@
-From 9451d36c84b1887c421c41a5ab3b4bf9114628e8 Mon Sep 17 00:00:00 2001
+From 03f15c65a284d4dec78489ee52ff6a12c284373a Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Marco=20Trevisan=20=28Trevi=C3=B1o=29?= <mail@3v1n0.net>
 Date: Tue, 17 Mar 2020 00:43:05 +0100
-Subject: [PATCH 31/36] docking: Consider theming when computing the
+Subject: [PATCH 32/37] docking: Consider theming when computing the
  sliderContainer space
 
 ---
@@ -30,5 +30,5 @@ index da63f6d..2712037 100644
              this.child.get_preferred_size();
  
 -- 
-2.25.1
+2.26.0
 

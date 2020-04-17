@@ -1,7 +1,7 @@
-From f5726d36e921ccba2d33460dffcfbdd9ab45f62f Mon Sep 17 00:00:00 2001
+From 1a36c886c716418e034f9e34249e815c46623e3f Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Marco=20Trevisan=20=28Trevi=C3=B1o=29?= <mail@3v1n0.net>
 Date: Fri, 13 Mar 2020 19:33:27 +0100
-Subject: [PATCH 17/36] docking: Reset old dash changes if something changes it
+Subject: [PATCH 18/37] docking: Reset old dash changes if something changes it
 
 This mitigate the case that was causing the default dash to show again after
 some time, as in case its size or visibility is changed we set it back to
@@ -68,5 +68,5 @@ index 79b1543..5e3c47f 100644
  
          Main.overview.dash.show();
 -- 
-2.25.1
+2.26.0
 

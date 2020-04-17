@@ -1,14 +1,14 @@
 %global extdir		%{_datadir}/gnome-shell/extensions/dash-to-dock@micxgx.gmail.com
 %global gschemadir	%{_datadir}/glib-2.0/schemas
 %global giturl		https://github.com/micheleg/dash-to-dock
-%global commit 77bc70783454f00fefc1e372ca2633ab27efedce
-%global commit_short 77bc707
-%global commit_date 20200408
+%global commit 9c132034854e382e5fb2ecb72b3feb442975d027
+%global commit_short 9c13203
+%global commit_date 20200415
 
 
 Name:		gnome-shell-extension-dash-to-dock
 Version:	67
-Release:	7.%{commit_date}git%{commit_short}%{?dist}
+Release:	8.%{commit_date}git%{commit_short}%{?dist}
 Summary:	Dock for the Gnome Shell by micxgx.gmail.com
 
 License:	GPLv2+
@@ -20,7 +20,7 @@ Source0:	%{giturl}/archive/extensions.gnome.org-v%{version}.tar.gz#/%{name}-%{ve
 %endif
 
 # GNOME 3.36 support
-# https://github.com/micheleg/dash-to-dock/pull/1097#event-3216150535
+# https://github.com/micheleg/dash-to-dock/pull/1097#event-3241755501
 Patch1: 0001-general-Update-to-gnome-shell-3.36-code-with-more-ac.patch
 Patch2: 0002-general-Use-Clutter.ActorAlign-to-set-alignments.patch
 Patch3: 0003-docking-Ensure-that-all-the-slider-children-are-prop.patch
@@ -33,30 +33,31 @@ Patch9: 0009-appIcons-windowPreview-Use-vfunc-instead-of-signals.patch
 Patch10: 0010-docking-Remove-unused-value.patch
 Patch11: 0011-dash-docking-Don-t-use-the-_delegate-pattern.patch
 Patch12: 0012-dash-Reuse-as-much-as-possible-upstream-code.patch
-Patch13: 0013-appIconIndicators-Make-the-count-badge-text-size-rel.patch
-Patch14: 0014-dash-Sync-some-more-to-the-upstream-cleanups.patch
-Patch15: 0015-docking-Properly-replace-default-dash-in-all-modes.patch
-Patch16: 0016-docking-Don-t-sync-overview-s-iconSize-anymore.patch
-Patch17: 0017-docking-Reset-old-dash-changes-if-something-changes-.patch
-Patch18: 0018-docking-Cleanup-the-docks-destruction-code.patch
-Patch19: 0019-docking-Use-parent-vfunc-results-to-get-slider-conta.patch
-Patch20: 0020-docking-Add-mainDock-property-to-DockManager-and-use.patch
-Patch21: 0021-docking-Don-t-pass-allDocks-to-every-child.patch
-Patch22: 0022-docking-Ignore-key-repeat.patch
-Patch23: 0023-fileManager1API-Use-a-cancellable-to-stop-proxy-crea.patch
-Patch24: 0024-dash-Cleanup-preferred-width-height-vfuncs-reusing-u.patch
-Patch25: 0025-dash-Get-content-box-from-the-themeNode.patch
-Patch26: 0026-dash-Some-code-cleanups-to-match-Upstream-code-bette.patch
-Patch27: 0027-appIcons-Redirect-events-from-the-showAppIcon-toggle.patch
-Patch28: 0028-general-Don-t-use-Gtk-enum-definitions-for-St-widget.patch
-Patch29: 0029-docking-Apply-the-height-width-dash-constraint-after.patch
-Patch30: 0030-docking-Delay-toggling-to-group-multiple-requests.patch
-Patch31: 0031-docking-Consider-theming-when-computing-the-sliderCo.patch
-Patch32: 0032-docking-Reimplement-Clutter.BindConstraint-to-bind-t.patch
-Patch33: 0033-docking-Replace-the-dashSpacer-instance-in-default-c.patch
-Patch34: 0034-docking-Make-sure-we-don-t-send-the-overview-offscre.patch
-Patch35: 0035-launcherAPI-Actually-keep-track-of-the-unity-bus-ID-.patch
-Patch36: 0036-docking-Completely-replace-upstream-dash-spacer-only.patch
+Patch13: 0013-stylesheet-Define-width-for-top-bottom-drop-placehol.patch
+Patch14: 0014-appIconIndicators-Make-the-count-badge-text-size-rel.patch
+Patch15: 0015-dash-Sync-some-more-to-the-upstream-cleanups.patch
+Patch16: 0016-docking-Properly-replace-default-dash-in-all-modes.patch
+Patch17: 0017-docking-Don-t-sync-overview-s-iconSize-anymore.patch
+Patch18: 0018-docking-Reset-old-dash-changes-if-something-changes-.patch
+Patch19: 0019-docking-Cleanup-the-docks-destruction-code.patch
+Patch20: 0020-docking-Use-parent-vfunc-results-to-get-slider-conta.patch
+Patch21: 0021-docking-Add-mainDock-property-to-DockManager-and-use.patch
+Patch22: 0022-docking-Don-t-pass-allDocks-to-every-child.patch
+Patch23: 0023-docking-Ignore-key-repeat.patch
+Patch24: 0024-fileManager1API-Use-a-cancellable-to-stop-proxy-crea.patch
+Patch25: 0025-dash-Cleanup-preferred-width-height-vfuncs-reusing-u.patch
+Patch26: 0026-dash-Get-content-box-from-the-themeNode.patch
+Patch27: 0027-dash-Some-code-cleanups-to-match-Upstream-code-bette.patch
+Patch28: 0028-appIcons-Redirect-events-from-the-showAppIcon-toggle.patch
+Patch29: 0029-general-Don-t-use-Gtk-enum-definitions-for-St-widget.patch
+Patch30: 0030-docking-Apply-the-height-width-dash-constraint-after.patch
+Patch31: 0031-docking-Delay-toggling-to-group-multiple-requests.patch
+Patch32: 0032-docking-Consider-theming-when-computing-the-sliderCo.patch
+Patch33: 0033-docking-Reimplement-Clutter.BindConstraint-to-bind-t.patch
+Patch34: 0034-docking-Replace-the-dashSpacer-instance-in-default-c.patch
+Patch35: 0035-docking-Make-sure-we-don-t-send-the-overview-offscre.patch
+Patch36: 0036-launcherAPI-Actually-keep-track-of-the-unity-bus-ID-.patch
+Patch37: 0037-docking-Completely-replace-upstream-dash-spacer-only.patch
 
 BuildArch:	noarch
 
@@ -115,6 +116,13 @@ fi
 
 
 %changelog
+* Thu Apr 16 2020 Mike DePaulo <mikedep333@gmail.com> - 67-8.20200408git3ca96a2
+- Rebase to master branch as of 2020-04-15
+  ("Use new convenience function to open settings")
+- Use latest proposed patches (37 total) for GNOME 3.36 compatibility
+  as of 2020-04-16
+  ("DnD shoud work properly also in horizontal mode")
+
 * Thu Apr 09 2020 Mike DePaulo <mikedep333@gmail.com> - 67-7.20200408git77bc707
 - Rebase to master branch as of 2020-04-08
 - Use latest proposed patches (36 total) for GNOME 3.36 compatibility

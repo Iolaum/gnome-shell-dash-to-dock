@@ -1,7 +1,7 @@
-From ef9ab1687eedd40d08b6155555b7eb721f18ced8 Mon Sep 17 00:00:00 2001
+From d04f06bc0edba361dca6999a9d8535dc27efa664 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Marco=20Trevisan=20=28Trevi=C3=B1o=29?= <mail@3v1n0.net>
 Date: Thu, 27 Feb 2020 21:53:34 +0100
-Subject: [PATCH 11/36] dash, docking: Don't use the _delegate pattern
+Subject: [PATCH 11/37] dash, docking: Don't use the _delegate pattern
 
 Most of UI classes in upstream gnome-shell are now actors, so don't use the
 delegate pattern anymore for the icons that are now everywhere actors.
@@ -11,7 +11,7 @@ delegate pattern anymore for the icons that are now everywhere actors.
  2 files changed, 12 insertions(+), 18 deletions(-)
 
 diff --git a/dash.js b/dash.js
-index 80bfd91..495e1ed 100644
+index 80bfd91..455499a 100644
 --- a/dash.js
 +++ b/dash.js
 @@ -509,13 +509,12 @@ var MyDash = GObject.registerClass({
@@ -20,7 +20,7 @@ index 80bfd91..495e1ed 100644
              return actor.child &&
 -                   actor.child._delegate &&
 -                   actor.child._delegate.icon &&
-+                   actor.child.icon &&
++                   !!actor.child.icon &&
                     !actor.animatingOut;
          });
  
@@ -36,7 +36,7 @@ index 80bfd91..495e1ed 100644
              return actor.child &&
 -                   actor.child._delegate &&
 -                   actor.child._delegate.icon &&
-+                   actor.child.icon &&
++                   !!actor.child.icon &&
                     !actor.animatingOut;
          });
  
@@ -64,7 +64,7 @@ index 80bfd91..495e1ed 100644
              return actor.child &&
 -                   actor.child._delegate &&
 -                   actor.child._delegate.app;
-+                   actor.child.app;
++                   !!actor.child.app;
          });
          // Apps currently in the dash
          let oldApps = children.map(function(actor) {
@@ -88,7 +88,7 @@ index 80bfd91..495e1ed 100644
              return actor.child &&
 -                actor.child._delegate &&
 -                actor.child._delegate.icon;
-+                actor.child.icon;
++                   !!actor.child.icon;
          });
          for (let i = 0; i < children.length; i++) {
              let item = children[i];
@@ -130,5 +130,5 @@ index d89901a..a40de00 100644
  
          // Activate with button = 1, i.e. same as left click
 -- 
-2.25.1
+2.26.0
 
