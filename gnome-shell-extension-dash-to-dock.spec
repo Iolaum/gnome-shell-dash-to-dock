@@ -8,7 +8,7 @@
 
 Name:		gnome-shell-extension-dash-to-dock
 Version:	68
-Release:	1%{?dist}
+Release:	2%{?dist}
 #Release:	1.%%{commit_date}git%%{commit_short}%%{?dist}
 Summary:	Dock for the Gnome Shell by micxgx.gmail.com
 
@@ -77,6 +77,9 @@ fi
 
 
 %changelog
+* Mon Jul 27 2020 Fedora Release Engineering <releng@fedoraproject.org> - 68-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_33_Mass_Rebuild
+
 * Mon Apr 20 2020 Mike DePaulo <mikedep333@gmail.com> - 68-1
 - Update from nightlies (called v67, of v68) to v68 release (2020-04-19)
 
