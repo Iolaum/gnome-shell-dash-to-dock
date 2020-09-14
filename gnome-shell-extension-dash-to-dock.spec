@@ -1,15 +1,17 @@
 %global extdir		%{_datadir}/gnome-shell/extensions/dash-to-dock@micxgx.gmail.com
 %global gschemadir	%{_datadir}/glib-2.0/schemas
 %global giturl		https://github.com/micheleg/dash-to-dock
-#%%global commit 9c132034854e382e5fb2ecb72b3feb442975d027
-#%%global commit_short 9c13203
-#%%global commit_date 20200415
+# Latest commit for GNOME 3.38 compatibility
+# https://github.com/micheleg/dash-to-dock/pull/1309
+%global commit e2cc4412ac4057a403722dd9af331aa43e86db8b
+%global commit_short e2cc441
+%global commit_date 20200911
 
 
 Name:		gnome-shell-extension-dash-to-dock
 Version:	68
-Release:	2%{?dist}
-#Release:	1.%%{commit_date}git%%{commit_short}%%{?dist}
+#Release:	3%%{?dist}
+Release:	3.%{commit_date}git%{commit_short}%{?dist}
 Summary:	Dock for the Gnome Shell by micxgx.gmail.com
 
 License:	GPLv2+
@@ -77,6 +79,9 @@ fi
 
 
 %changelog
+* Mon Sep 14 2020 Mike DePaulo <mikedep333@gmail.com> - 68-3.20200911gite2cc441
+- Upgrade to PR/branch for GNOME 3.38 compatibility, latest as of 2020-09-11
+
 * Mon Jul 27 2020 Fedora Release Engineering <releng@fedoraproject.org> - 68-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_33_Mass_Rebuild
 
