@@ -3,16 +3,16 @@
 %global giturl		https://github.com/micheleg/dash-to-dock
 # Latest commit for GNOME 3.38 compatibility
 # https://github.com/micheleg/dash-to-dock/pull/1309
-%global commit e2cc4412ac4057a403722dd9af331aa43e86db8b
-%global commit_short e2cc441
-%global commit_date 20200911
+%global commit 71abe800b2bc0bca60c63c8e646db2a8a9827ddf
+%global commit_short 71abe80
+%global commit_date 20201004
 
 
 Name:		gnome-shell-extension-dash-to-dock
-Version:	68
+Version:	69
 #Release:	3%%{?dist}
-Release:	3.%{commit_date}git%{commit_short}%{?dist}
-Summary:	Dock for the Gnome Shell by micxgx.gmail.com
+Release:	1.%{commit_date}git%{commit_short}%{?dist}
+Summary:	Dock for the Gnome Shell by micxgx@gmail.com
 
 License:	GPLv2+
 URL:		https://micheleg.github.io/dash-to-dock
@@ -79,6 +79,9 @@ fi
 
 
 %changelog
+* Thu Nov 19 2020 Nikolaos Perrakis <nikperrakis@gmail.com> - 69-1.20201004git71abe80
+- Upgrade to version 69, fixing GNOME 3.38 compatibility issues
+
 * Mon Sep 14 2020 Mike DePaulo <mikedep333@gmail.com> - 68-3.20200911gite2cc441
 - Upgrade to PR/branch for GNOME 3.38 compatibility, latest as of 2020-09-11
 
